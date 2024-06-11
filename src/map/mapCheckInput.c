@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:40:14 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/11 16:15:36 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/11 16:52:33 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	checkAll(t_game *game)
 	good = False;
 	if (checkOtherChar(game))
 		good = error("Bad Caracter");
-	if (!checkWall(game))
+	if (checkWall(game))
 		good = error("Wall error");
-	if (!checkPlayer(game))
+	if (checkPlayer(game))
 		good = error("Player error");
 	return (good);
 }
@@ -37,9 +37,9 @@ int	checkOtherChar(t_game *game)
 		j = 0;
 		while (j < game->mesure.column)
 		{
-			if (game->area[i][j] != '0' || game->area[i][j] != '1'
-					|| game->area[i][j] != 'N' || game->area[i][j] != 'S'
-					|| game->area[i][j] != 'E' || game->area[i][j] != 'W')
+			if (game->area[i][j] != '0' && game->area[i][j] != '1'
+					&& game->area[i][j] != 'N' && game->area[i][j] != 'S'
+					&& game->area[i][j] != 'E' && game->area[i][j] != 'W')
 				return (True);
 			j++;
 		}
@@ -94,5 +94,5 @@ int	checkPlayer(t_game *game)
 		}
 		i++;
 	}
-	return (player == 1);
+	return (player != 1);
 }
