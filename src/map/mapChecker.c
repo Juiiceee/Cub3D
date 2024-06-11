@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:08:44 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/11 15:50:01 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/11 16:52:49 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	checkExtension(char	*str)
 		if (fd < 0 || read(fd, 0, 0) < 0)
 			return (error("Le fichier ne peut pas etre ouvert"));
 		close(fd);
-		return (1);
+		return (0);
 	}
 	return (error("La map n'a pas la bonne extension"));
 }
@@ -46,5 +46,5 @@ int	checkSize(t_game game)
 		return (error("La saisie n'est pas un rectangle"));
 	else if (game.mesure.column > 38 || game.mesure.line > 20)
 		return (error("La saisie est trop grande pour l'ecran"));
-	return (1);
+	return (0);
 }

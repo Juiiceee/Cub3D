@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/06/11 16:24:25 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/11 16:56:29 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,18 +182,22 @@ int	on_keypress(int keycode, t_game *game)
 int main(int argc, char **argv)
 {
 	t_game game;
+	/*char *argv[] = {"caca", "maps/good/5*5.cub", 0};
+	int argc = 2;*/
 
 	if (argc == 2)
 	{
-		if (!checkExtension(argv[1]))
-			return (0);
+		if (checkExtension(argv[1]))
+			return (1);
 		game.mesure.line = calculateMapSize(argv[1], &game.mesure.column);
-		if (!checkSize(game))
-			return (0);
+		if (checkSize(game))
+			return (1);
 		inputArea(argv[1], &game);
-		if (!checkAll(&game))
+		if (checkAll(&game))
 			return (freeTab(&game), 0);
 	}
+	/*int fd = open("maps/good/5*5.cub", O_RDONLY);
+	printf("%s", get_next_line(fd));*/
 	/*game.mlx_ptr = mlx_init();
 	game.win_ptr = mlx_new_window(game.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Je t'aime Mathieu");
 	game.posx = 1.5;
