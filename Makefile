@@ -6,7 +6,7 @@
 #    By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/12 15:57:01 by lbehr             #+#    #+#              #
-#    Updated: 2024/06/11 13:40:06 by lbehr            ###   ########.fr        #
+#    Updated: 2024/06/11 13:49:38 by lbehr            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,10 @@ MINI		:= -lX11 -lXext Include/minilibx-linux/libmlx_Linux.a
 CFLAGS		:= -Wall -Wextra -Werror -g3
 CPPFLAGS	:= -MMD -MP -I Include
 MLX_PATH	:= Include/minilibx-linux
+DEPS		:= $(OBJS:.o=.d)
 RM			:= rm -rf
 DIR_DUP		= mkdir -p $(@D)
-LIBFT			:= libft
+LIBFT		:= libft
 
 all		: $(MLX_PATH) $(NAME)
 

@@ -48,7 +48,9 @@ SRC = ft_bzero.c \
 
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
-FLAGS = -Wall -Wextra -Werror -g3
+FLAGS 		:= -Wall -Wextra -Werror -g3
+CPPFLAGS	:= -MMD -MP
+DEPS		:= $(OBJS:.o=.d)
 
 ARC = ar rc
 
@@ -61,7 +63,9 @@ INCLUDE = ./
 all: $(NAME)
 
 $(OBJ_DIR)/%.o: %.c
-	$(CC) -c $< $(CFLAGS) -o $@
+	$(CC) -c $< $(CFLAGS) $(CPPFLAGS) -o $@
+
+-include $(DEPS)
 
 $(NAME): ${OBJ}
 		$(ARC) $(NAME) $(OBJ)
