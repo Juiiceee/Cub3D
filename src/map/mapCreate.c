@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:32:50 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/11 15:50:30 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/11 16:08:01 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,10 @@ char	**createArea(int ligne, size_t colonne)
 		i++;
 	}
 	return (area);
+}
+
+void	putpos(t_game *game, int x, int y)
+{
+	game->pos.posx = x;
+	game->pos.posy = y;
 }
