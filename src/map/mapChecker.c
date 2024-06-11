@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mapchecker.c                                       :+:      :+:    :+:   */
+/*   mapChecker.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:08:44 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/11 13:30:23 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/11 15:50:01 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int	checkextension(char	*str)
+int	checkExtension(char	*str)
 {
 	int		cb;
 	int		i;
@@ -38,4 +38,13 @@ int	checkextension(char	*str)
 		return (1);
 	}
 	return (error("La map n'a pas la bonne extension"));
+}
+
+int	checkSize(t_game game)
+{
+	if (game.mesure.line == 0)
+		return (error("La saisie n'est pas un rectangle"));
+	else if (game.mesure.column > 38 || game.mesure.line > 20)
+		return (error("La saisie est trop grande pour l'ecran"));
+	return (1);
 }

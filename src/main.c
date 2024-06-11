@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/06/11 11:36:00 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/11 15:50:43 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,10 +179,22 @@ int	on_keypress(int keycode, t_game *game)
 	return (0);
 }
 
-int main() {
+int main(int argc, char **argv)
+{
 	t_game game;
 
-	game.mlx_ptr = mlx_init();
+	if (argc == 2)
+	{
+		if (!checkExtension(argv[1]))
+			return (0);
+		game.mesure.line = calculateMapSize(argv[1], &game.mesure.column);
+		if (!checkSize(game))
+			return (0);
+		inputArea(argv[1], &game);
+		if (!checkall(&game))
+			return (freetab(&game), 0);
+	}
+	/*game.mlx_ptr = mlx_init();
 	game.win_ptr = mlx_new_window(game.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Je t'aime Mathieu");
 	game.posx = 1.5;
 	game.posy = 1.5;
@@ -196,5 +208,5 @@ int main() {
 	mlx_hook(game.win_ptr, 17, (1L << 17), &on_destroy, &game);
 	mlx_loop(game.mlx_ptr);
 
-	return 0;
+	return 0;*/
 }
