@@ -1,6 +1,6 @@
 NAME = libft.a
 
-OBJ_DIR			:= ../obj
+OBJ_DIR			:= ../obj/libft
 
 SRC = ft_bzero.c \
 		ft_isalnum.c \
@@ -51,6 +51,7 @@ OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 FLAGS 		:= -Wall -Wextra -Werror -g3
 CPPFLAGS	:= -MMD -MP
 DEPS		:= $(OBJS:.o=.d)
+DIR_DUP		= mkdir -p $(@D)
 
 ARC = ar rc
 
@@ -63,6 +64,7 @@ INCLUDE = ./
 all: $(NAME)
 
 $(OBJ_DIR)/%.o: %.c
+	$(DIR_DUP)
 	$(CC) -c $< $(CFLAGS) $(CPPFLAGS) -o $@
 
 -include $(DEPS)
@@ -72,7 +74,7 @@ $(NAME): ${OBJ}
 		$(LIBRAN) $(NAME)
 
 clean:
-	rm -f $(OBJ) $(OBJB)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)
