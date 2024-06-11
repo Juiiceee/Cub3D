@@ -6,7 +6,7 @@
 #    By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/12 15:57:01 by lbehr             #+#    #+#              #
-#    Updated: 2024/06/11 09:00:55 by lbehr            ###   ########.fr        #
+#    Updated: 2024/06/11 09:28:20 by lbehr            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS		:= main.c
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
 OBJS		:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 CC			:= cc
-MINI		:= -lX11 -lXext Include/minilibx-linux/libmlx_Linux.a -I Include
+MINI		:= -lX11 -lXext Include/minilibx-linux/libmlx_Linux.a
 CFLAGS		:= -Wall -Wextra -Werror -g3
 MLX_PATH	:= Include/minilibx-linux
 RM			:= rm -rf
@@ -35,9 +35,11 @@ $(NAME)	:	$(OBJS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(DIR_DUP)
-	$(CC) -c $< $(CFLAGS) -o $@
+	$(CC) -c $< $(CFLAGS) -I Include -MMD -MP -o $@
 
-bonus	:	all
+-include $(DEPS)
+
+bonus	:
 
 clean	:
 	$(RM) $(OBJS)
