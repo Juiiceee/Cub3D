@@ -1,6 +1,6 @@
 NAME = libft.a
 
-OBJ_DIR			:= ../obj
+OBJ_DIR			:= ../obj/libft
 
 SRC = ft_bzero.c \
 		ft_isalnum.c \
