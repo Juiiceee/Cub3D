@@ -3,68 +3,55 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+         #
+#    By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/06/06 12:42:28 by mda-cunh          #+#    #+#              #
-#    Updated: 2024/06/06 12:43:26 by mda-cunh         ###   ########.fr        #
+#    Created: 2023/12/12 15:57:01 by lbehr             #+#    #+#              #
+#    Updated: 2024/06/11 09:00:55 by lbehr            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	so_long
+NAME		:= cub3D
+SRC_DIR		:= src
+OBJ_DIR		:= obj
+SRCS		:= main.c
+SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
+OBJS		:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+CC			:= cc
+MINI		:= -lX11 -lXext Include/minilibx-linux/libmlx_Linux.a -I Include
+CFLAGS		:= -Wall -Wextra -Werror -g3
+MLX_PATH	:= Include/minilibx-linux
+RM			:= rm -rf
+DIR_DUP     = mkdir -p $(@D)
 
-CC			=	cc
+all		: $(MLX_PATH) $(NAME)
 
-FLAG		=	-Wall -Wextra -Werror -g
+$(MLX_PATH):
+	git clone git@github.com:42Paris/minilibx-linux.git Include/minilibx-linux
 
-MLX_FILE	=	libmlx.a
+$(NAME)	:	$(OBJS)
+	$(DIR_DUP)
+	make -C $(MLX_PATH) --no-print-directory
+	$(CC) $(OBJS) $(MINI) -o $(NAME)
 
-MLX_FLAG	=	-lX11 -lXext
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	$(DIR_DUP)
+	$(CC) -c $< $(CFLAGS) -o $@
 
-MLX_PATH	=	./minilibx-linux/
+bonus	:	all
 
-MLX_LIB		=	$(addprefix $(MLX_PATH), $(MLX_FILE))
+clean	:
+	$(RM) $(OBJS)
+	$(RM) $(OBJ_DIR)
 
-MLX_EX		=	$(MLX_LIB) $(MLX_FLAG)
+fclean	:	clean
+	$(RM) $(NAME)
+	
+git	:	fclean
+	$(RM) $(MLX_PATH)
+	$(RM) bin
 
-SRC			=	main.c \
+re		:	fclean all
 
-INC_DIR		=	./
+rall	:	git all
 
-OBJ			=	$(SRC:.c=.o)
-
-.c.o:
-	$(CC) $(FLAG) -c $< -o $@
-
-all: mlx $(NAME)
-
-mlx:
-	@echo "\033[0;33m\nCOMPILING $(MLX_PATH)...\n"
-	@make -sC $(MLX_PATH)
-	@echo "\033[1;32mMLX_lib created\n"
-
-$(NAME): $(OBJ)
-	@echo "\033[0;33m\nCOMPILING SO_LONG...\n"
-	$(CC) $(OBJ) $(MLX_EX) -o $(NAME)
-	@echo "\033[1;32m./so_long created\n"
-
-clean:
-	@echo "\033[0;31mDeleting Obj file in $(MLX_PATH)...\n"
-	@make clean -sC $(MLX_PATH)
-	@echo "\033[1;32mDone\n"
-	@echo "\033[0;31mDeleting So_long object...\n"
-	@rm -f $(OBJ) $(OBJB)
-	@echo "\033[1;32mDone\n"
-
-fclean: clean
-	@echo "\033[0;31mDeleting so_long executable..."
-	@rm -f $(NAME) so_bonus_long
-	@echo "\033[1;32mDone\n"
-
-bonus: lib pri mlx $(OBJB)
-	@echo "\033[0;33m\nCOMPILING SO_BONUS_LONG...\n"
-	$(CC) $(OBJB) $(MLX_EX) -o so_bonus_long
-	@echo "\033[1;32m./SO_BONUS_LONG created\n"
-
-re: fclean all
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean git re rall bonus
