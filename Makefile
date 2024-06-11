@@ -6,7 +6,7 @@
 #    By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/12 15:57:01 by lbehr             #+#    #+#              #
-#    Updated: 2024/06/11 14:04:49 by lbehr            ###   ########.fr        #
+#    Updated: 2024/06/11 14:39:16 by lbehr            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ MLX_PATH	:= Include/minilibx-linux
 DEPS		:= $(OBJS:.o=.d)
 RM			:= rm -rf
 DIR_DUP		= mkdir -p $(@D)
-DIR_DUP1	= mkdir -p $(@D)/libft
 LIBFT		:= libft
 
 all		: $(MLX_PATH) $(NAME)
@@ -35,7 +34,6 @@ $(MLX_PATH):
 
 $(NAME)	:	$(OBJS)
 	$(DIR_DUP)
-	$(DIR_DUP1)
 	@make -C $(LIBFT) --no-print-directory
 	@make -C $(MLX_PATH) --no-print-directory
 	$(CC) $(OBJS) $(LIBFT)/libft.a $(MINI) -o $(NAME)

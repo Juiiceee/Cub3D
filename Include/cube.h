@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/11 13:59:21 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/11 14:26:55 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,24 @@
 #  define BUFFER_SIZE 10
 # endif
 
+typedef struct s_game_mesure
+{
+	int	line;
+	int	column;
+}	t_game_mesure;
+
 typedef struct s_game
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	float	posx;
-	float	posy;
-	float	dirx;
-	float	diry;
-	float	planex;
-	float	planey;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	char			**area;
+	t_game_mesure	mesure;
+	float			posx;
+	float			posy;
+	float			dirx;
+	float			diry;
+	float			planex;
+	float			planey;
 }	t_game;
 
 // maputils.c
