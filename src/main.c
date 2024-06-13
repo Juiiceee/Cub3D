@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/06/13 15:19:40 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/13 15:22:44 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,33 +147,33 @@ void head_turn(t_game *game, float angle)
 
 int	on_keypress(int keycode, t_game *game)
 {
-	if (keycode == 65307)
+	if (keycode == XK_Escape)
 		on_destroy(game);
-	else if (keycode == 97)
+	else if (keycode == XK_a)
 	{
 		game->pos.posX -= game->pos.planeX * 0.10;
 		game->pos.posY -= game->pos.planeY * 0.10;
 	}
-	else if (keycode == 100)
+	else if (keycode == XK_d)
 	{
 		game->pos.posX += game->pos.planeX * 0.10;
 		game->pos.posY += game->pos.planeY * 0.10;
 	}
-	else if (keycode == 115 || keycode == 65364)
+	else if (keycode == XK_s || keycode == XK_Down)
 	{
 		game->pos.posX -= game->pos.dirX * 0.10;
 		game->pos.posY -= game->pos.dirY * 0.10;
 	}
-	else if (keycode == 119 || keycode == 65362)
+	else if (keycode == XK_w || keycode == XK_Up)
 	{
 		game->pos.posX += game->pos.dirX * 0.10;
 		game->pos.posY += game->pos.dirY * 0.10;
 	}
-	else if (keycode == 65361)
+	else if (keycode == XK_Left)
 	{
 		head_turn(game, -0.10);
 	}
-	else if (keycode == 65363)
+	else if (keycode == XK_Right)
 	{
 		head_turn(game, 0.10);
 
