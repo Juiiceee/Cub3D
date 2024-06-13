@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+         #
+#    By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/12 15:57:01 by lbehr             #+#    #+#              #
-#    Updated: 2024/06/11 16:11:23 by lbehr            ###   ########.fr        #
+#    Updated: 2024/06/13 07:08:19 by mda-cunh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ $(NAME)	:	$(OBJS)
 	$(DIR_DUP)
 	@make -C $(LIBFT) --no-print-directory
 	@make -C $(MLX_PATH) --no-print-directory
-	$(CC) $(OBJS) $(LIBFT)/libft.a $(MINI) -o $(NAME)
+	$(CC) $(OBJS) $(LIBFT)/libft.a $(MINI) -o $(NAME) -lm
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(DIR_DUP)
