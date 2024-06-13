@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/13 07:05:13 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/06/13 11:26:06 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <math.h>
 # include "../libft/libft.h"
 
-# define WIN_WIDTH 640
-# define WIN_HEIGHT 480
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
 # define MAP_WIDTH 10
 # define MAP_HEIGHT 10
 # define WHITE 0xFFFFFF
@@ -38,6 +38,18 @@ typedef enum e_bool
 	True
 }	t_bool;
 
+typedef struct s_coord
+{
+	double			x;
+	double			y;
+}					t_coord;
+
+typedef struct s_coord_int
+{
+	int			x;
+	int			y;
+}					t_coord_int;
+
 typedef struct s_game_mesure
 {
 	int	line;
@@ -46,13 +58,42 @@ typedef struct s_game_mesure
 
 typedef struct s_game_pos
 {
-	float	posX;
-	float	posY;
-	float	dirX;
-	float	dirY;
-	float	planeX;
-	float	planeY;
+	double	posX;
+	double	posY;
+	double	dirX;
+	double	dirY;
+	double	planeX;
+	double	planeY;
 }	t_game_pos;
+
+typedef struct s_game_ray
+{
+	double		cameraX;
+	t_coord		rayDir;
+	t_coord		sideDist;
+	t_coord		deltaDist;
+	t_coord_int	map;
+	t_coord_int step;
+	double		perpWallDist;
+	int			lineHeight;
+	int			drawStart;
+	int 		drawEnd;
+	t_coord_int	start_point;
+	t_coord_int	end_point;
+	int			side;
+}	t_game_ray;
+
+typedef struct s_game_texture
+{
+	void			*img;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+	int				width;
+	int				height;
+} t_game_texture;
+
 
 typedef struct s_game
 {
@@ -61,6 +102,9 @@ typedef struct s_game
 	char			**area;
 	t_game_mesure	mesure;
 	t_game_pos		pos;
+	t_game_texture	texture;
+	t_game_texture	img;
+	t_game_ray		ray;
 }	t_game;
 
 //mapChecker.c
