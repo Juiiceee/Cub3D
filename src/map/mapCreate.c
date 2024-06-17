@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapCreate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:32:50 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/13 07:07:06 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/06/17 13:47:34 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ char	**createArea(int ligne, size_t colonne)
 
 void	putpos(t_game *game, int x, int y)
 {
-	game->pos.posX = x;
-	game->pos.posY = y;
+	game->pos.posx = x;
+	game->pos.posy = y;
 }

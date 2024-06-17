@@ -1,42 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mapSize.c                                          :+:      :+:    :+:   */
+/*   mapColor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/11 14:23:56 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/17 17:54:57 by lbehr            ###   ########.fr       */
+/*   Created: 2024/06/17 14:10:56 by lbehr             #+#    #+#             */
+/*   Updated: 2024/06/17 14:11:04 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int	calculateMapSize(char *map, int *colonne)
+int	recoColorC()
 {
-	int		fd;
-	char	*str;
-	int		ligne;
-	int		test;
+	
+}
 
-	ligne = 0;
-	test = 0;
-	fd = open(map, O_RDONLY);
-	str = get_next_line(fd);
-	*colonne = strlenno(str);
-	while (1)
-	{
-		ligne++;
-		free(str);
-		str = get_next_line(fd);
-		if (*colonne != strlenno(str) && str)
-			test = 1;
-		if (!str)
-			break ;
-	}
-	close(fd);
-	if (test == 1)
-		return (freeandreturn(str));
-	free(str);
-	return (ligne);
+int	recoColorF()
+{
+	
 }

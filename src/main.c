@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/06/13 15:22:44 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/17 17:55:05 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ void raycast(t_game *game)
 	for (int x = 0; x < WIN_WIDTH; x++) 
 	{
 		float cameraX = 2 * x / (float)WIN_WIDTH - 1; // x-coordinate in camera space
-		float rayDirX = game->pos.dirX + game->pos.planeX * cameraX;
-		float rayDirY = game->pos.dirY + game->pos.planeY * cameraX;
+		float rayDirX = game->pos.dirx + game->pos.planex * cameraX;
+		float rayDirY = game->pos.diry + game->pos.planey * cameraX;
 
-		int mapX = (int)game->pos.posX;
-		int mapY = (int)game->pos.posY;
+		int mapX = (int)game->pos.posx;
+		int mapY = (int)game->pos.posy;
 
 		float sideDistX;
 		float sideDistY;
@@ -59,22 +59,22 @@ void raycast(t_game *game)
 		if (rayDirX < 0) 
 		{
 			stepX = -1;
-			sideDistX = (game->pos.posX - mapX) * deltaDistX;
+			sideDistX = (game->pos.posx - mapX) * deltaDistX;
 		} 
 		else 
 		{
 			stepX = 1;
-			sideDistX = (mapX + 1.0 - game->pos.posX) * deltaDistX;
+			sideDistX = (mapX + 1.0 - game->pos.posx) * deltaDistX;
 		}
 		if (rayDirY < 0) 
 		{
 			stepY = -1;
-			sideDistY = (game->pos.posY - mapY) * deltaDistY;
+			sideDistY = (game->pos.posy - mapY) * deltaDistY;
 		} 
 		else 
 		{
 			stepY = 1;
-			sideDistY = (mapY + 1.0 - game->pos.posY) * deltaDistY;
+			sideDistY = (mapY + 1.0 - game->pos.posy) * deltaDistY;
 		}
 
 		while (hit == 0) 
@@ -96,9 +96,9 @@ void raycast(t_game *game)
 		}
 
 		if (side == 0)
-			perpWallDist = (mapX - game->pos.posX + (1 - stepX) / 2) / rayDirX;
+			perpWallDist = (mapX - game->pos.posx + (1 - stepX) / 2) / rayDirX;
 		else
-			perpWallDist = (mapY - game->pos.posY + (1 - stepY) / 2) / rayDirY;
+			perpWallDist = (mapY - game->pos.posy + (1 - stepY) / 2) / rayDirY;
 
 		int lineHeight = (int)(WIN_HEIGHT / perpWallDist);
 
@@ -134,13 +134,13 @@ int	on_destroy(t_game *game)
 
 void head_turn(t_game *game, float angle) 
 {
-	float oldDirX = game->pos.dirX;
-	game->pos.dirX = game->pos.dirX * cos(angle) - game->pos.dirY * sin(angle);
-	game->pos.dirY = oldDirX * sin(angle) + game->pos.dirY * cos(angle);
+	float oldDirX = game->pos.dirx;
+	game->pos.dirx = game->pos.dirx * cos(angle) - game->pos.diry * sin(angle);
+	game->pos.diry = oldDirX * sin(angle) + game->pos.diry * cos(angle);
 
-	float oldPlaneX = game->pos.planeX;
-	game->pos.planeX = game->pos.planeX * cos(angle) - game->pos.planeY * sin(angle);
-	game->pos.planeY = oldPlaneX * sin(angle) + game->pos.planeY * cos(angle);
+	float oldPlaneX = game->pos.planex;
+	game->pos.planex = game->pos.planex * cos(angle) - game->pos.planey * sin(angle);
+	game->pos.planey = oldPlaneX * sin(angle) + game->pos.planey * cos(angle);
 	// printf("dirY = %f || dirX = %f\n", game->dirY, game->dirX);
 	// printf("planeY = %f || planeX = %f\n", game->planeY, game->planeX);
 }
@@ -151,23 +151,23 @@ int	on_keypress(int keycode, t_game *game)
 		on_destroy(game);
 	else if (keycode == XK_a)
 	{
-		game->pos.posX -= game->pos.planeX * 0.10;
-		game->pos.posY -= game->pos.planeY * 0.10;
+		game->pos.posx -= game->pos.planex * 0.10;
+		game->pos.posy -= game->pos.planey * 0.10;
 	}
 	else if (keycode == XK_d)
 	{
-		game->pos.posX += game->pos.planeX * 0.10;
-		game->pos.posY += game->pos.planeY * 0.10;
+		game->pos.posx += game->pos.planex * 0.10;
+		game->pos.posy += game->pos.planey * 0.10;
 	}
 	else if (keycode == XK_s || keycode == XK_Down)
 	{
-		game->pos.posX -= game->pos.dirX * 0.10;
-		game->pos.posY -= game->pos.dirY * 0.10;
+		game->pos.posx -= game->pos.dirx * 0.10;
+		game->pos.posy -= game->pos.diry * 0.10;
 	}
 	else if (keycode == XK_w || keycode == XK_Up)
 	{
-		game->pos.posX += game->pos.dirX * 0.10;
-		game->pos.posY += game->pos.dirY * 0.10;
+		game->pos.posx += game->pos.dirx * 0.10;
+		game->pos.posy += game->pos.diry * 0.10;
 	}
 	else if (keycode == XK_Left)
 	{
@@ -178,7 +178,7 @@ int	on_keypress(int keycode, t_game *game)
 		head_turn(game, 0.10);
 
 	}
-	printf("posY = %f || posX = %f\n", game->pos.posY, game->pos.posX);
+	printf("posY = %f || posX = %f\n", game->pos.posy, game->pos.posx);
 	return (0);
 }
 
@@ -197,18 +197,18 @@ int main(int argc, char **argv)
 			return (1);
 		inputArea(argv[1], &game);
 		if (checkAll(&game))
-			return (freeTab(&game), 0);
+			return (freetab(&game), 0);
 	}
 	/*int fd = open("maps/good/5*5.cub", O_RDONLY);
 	printf("%s", get_next_line(fd));*/
 	game.mlx_ptr = mlx_init();
 	game.win_ptr = mlx_new_window(game.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Je t'aime Mathieu");
-	game.pos.posX = 1.5;
-	game.pos.posY = 1.5;
-	game.pos.dirX = 1; // 1 south // -1 north
-	game.pos.dirY = 0; // -1 west // 1 east
-	game.pos.planeX = 0; // 0.66 west // -0.66 easy 
-	game.pos.planeY = 0.66; // 0.66 south // -0.66 north
+	game.pos.posx = 1.5;
+	game.pos.posy = 1.5;
+	game.pos.dirx = 1; // 1 south // -1 north
+	game.pos.diry = 0; // -1 west // 1 east
+	game.pos.planex = 0; // 0.66 west // -0.66 easy 
+	game.pos.planey = 0.66; // 0.66 south // -0.66 north
 
 	mlx_loop_hook(game.mlx_ptr, main_loop, &game);
 	mlx_hook(game.win_ptr, 02, (1L << 0), &on_keypress, &game);
