@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/13 11:26:06 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:18:41 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <math.h>
 # include "../libft/libft.h"
 
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
+# define WIN_WIDTH 960
+# define WIN_HEIGHT 560
 # define MAP_WIDTH 10
 # define MAP_HEIGHT 10
 # define WHITE 0xFFFFFF
@@ -85,13 +85,13 @@ typedef struct s_game_ray
 
 typedef struct s_game_texture
 {
-	void			*img;
-	char			*addr;
-	int				bits_per_pixel;
-	int				line_length;
-	int				endian;
-	int				width;
-	int				height;
+    void *img;
+    char *data;
+    int width;
+    int height;
+    int bpp;
+    int size_line;
+    int endian;
 } t_game_texture;
 
 
@@ -104,6 +104,8 @@ typedef struct s_game
 	t_game_pos		pos;
 	t_game_texture	texture;
 	t_game_texture	img;
+	t_game_texture	floor_texture;
+    t_game_texture	ceiling_texture;
 	t_game_ray		ray;
 }	t_game;
 
