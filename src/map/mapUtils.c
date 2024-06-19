@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:24:55 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/19 16:49:30 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/19 17:27:24 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	addvaluetexture(int i, char *line, char **map_texture)
 		j++;
 	*map_texture = ft_substr(line, i, j);
 	free(line);
+	if (checkExtension(*map_texture, ".xpm"))
+		return (1);
 	if (*map_texture)
 		return (0);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/19 16:40:16 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/19 17:35:34 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,7 @@ typedef struct s_game
 
 // mapChecker.c
 
-int							checkExtension(char *str);
-int							checkSize(t_game game);
+int							checkExtension(char *str, char *extension);
 
 // mapCheckerInput.c
 
@@ -101,18 +100,20 @@ int							checkPlayer(t_game *game);
 
 // mapCreate.c
 
-void						inputArea(char *map, t_game *game);
-void						createArea(t_game *game);
+int							createArea(t_game *game);
 void						putpos(t_game *game, int x, int y);
 
 // mapSize.c
 
-void						calculateMapSize(char *pathmap, t_game *game);
+int							calculateMapSize(char *pathmap, t_game *game);
 
 // mapTexture.c
 
-int							recomapinfo(t_game_map_info *info);
-
+int							recomapinfo(t_game *game);
+int							recotexturen(t_game *game);
+int							recotexturee(t_game *game);
+int							recotextures(t_game *game);
+int							recotexturw(t_game *game);
 // mapUtils.c
 
 int							error(char *text);

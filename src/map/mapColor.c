@@ -6,13 +6,13 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:10:56 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/17 14:11:04 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/19 17:33:42 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int	recoColorC()
+/*int	recoColorC()
 {
 	
 }
@@ -20,4 +20,4 @@ int	recoColorC()
 int	recoColorF()
 {
 	
-}
+}*/

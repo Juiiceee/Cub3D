@@ -6,134 +6,105 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:38:15 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/18 16:06:15 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/19 17:59:24 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int	recomapinfo(t_game_map_info *info)
+int	recomapinfo(t_game *game)
 {
-	int		i;
-	char	**map;
-	int		fd;
+	int	i;
 
-	fd = open(info->pathmap, O_RDONLY);
 	i = 0;
-	while (get_next_line(fd))
-		i++;
-	map = malloc(sizeof(char*) * i);
-	i = 0;
-	if ()
-	while (map[i])
-	i = 0;
-	if (recotexturen(info))
+	if (recotexturen(game))
 		return (i);
-	if (recotexturee(info))
+	if (recotexturee(game))
 		return (++i);
-	if (recotexturee(info))
+	if (recotexturee(game))
 		return (++i);
-	if (recotexturee(info))
+	if (recotexturee(game))
 		return (++i);
 	return (0);
 }
 
-int	recotexturen(t_game_map_info *info)
+int	recotexturen(t_game *game)
 {
-	char	*line;
-	int		fd;
-	int		i;
+	int	i;
+	int	j;
 
+	j = 0;
 	i = 0;
-	fd = open(info->pathmap, O_RDONLY);
-	line = get_next_line(fd);
-	while (line)
+	while (i < game->map_info.map_dim.height)
 	{
-		if (!ft_strncmp(line, "N ", 2))
-			i = 2;
-		if (!ft_strncmp(line, "NO ", 3))
-			i = 3;
-		if (i != 0)
-		{
-			close(fd);
-			return (addvaluetexture(i, line, &info->map_texture.north));
-		}
-		free(line);
-		line = get_next_line(fd);
+		if (!ft_strncmp(game->area[i], "N ", 2))
+			j = 2;
+		if (!ft_strncmp(game->area[i], "NO ", 3))
+			j = 3;
+		if (j != 0)
+			return (addvaluetexture(j, game->area[i],
+					&game->map_info.map_texture.north));
+		i++;
 	}
-	return (close(fd), 1);
+	return (1);
 }
 
-int	recotexturee(t_game_map_info *info)
+int	recotexturee(t_game *game)
 {
-	char	*line;
-	int		fd;
-	int		i;
+	int	i;
+	int	j;
 
+	j = 0;
 	i = 0;
-	fd = open(info->pathmap, O_RDONLY);
-	line = get_next_line(fd);
-	while (line)
+	while (i < game->map_info.map_dim.height)
 	{
-		if (!ft_strncmp(line, "E ", 2))
-			i = 2;
-		if (!ft_strncmp(line, "EA ", 3))
-			i = 3;
-		if (i != 0)
-			return (close(fd), addvaluetexture(i, line,
-					&info->map_texture.east));
-		free(line);
-		line = get_next_line(fd);
+		if (!ft_strncmp(game->area[i], "E ", 2))
+			j = 2;
+		if (!ft_strncmp(game->area[i], "EA ", 3))
+			j = 3;
+		if (j != 0)
+			return (addvaluetexture(j, game->area[i],
+					&game->map_info.map_texture.east));
 	}
-	return (close(fd), 1);
+	return (1);
 }
 
-int	recotextures(t_game_map_info *info)
+int	recotextures(t_game *game)
 {
-	char	*line;
-	int		fd;
-	int		i;
+	int	i;
+	int	j;
 
+	j = 0;
 	i = 0;
-	fd = open(info->pathmap, O_RDONLY);
-	line = get_next_line(fd);
-	while (line)
+	while (i < game->map_info.map_dim.height)
 	{
-		if (!ft_strncmp(line, "S ", 2))
-			i = 2;
-		if (!ft_strncmp(line, "SU ", 3))
-			i = 3;
-		if (i != 0)
-			return (close(fd), addvaluetexture(i, line,
-					&info->map_texture.south));
-		free(line);
-		line = get_next_line(fd);
+		if (!ft_strncmp(game->area[i], "S ", 2))
+			j = 2;
+		if (!ft_strncmp(game->area[i], "SU ", 3))
+			j = 3;
+		if (j != 0)
+			return (addvaluetexture(j, game->area[i],
+					&game->map_info.map_texture.south));
 	}
-	return (close(fd), 1);
+	return (1);
 }
 
-int	recotexturw(t_game_map_info *info)
+int	recotexturw(t_game *game)
 {
-	char	*line;
-	int		fd;
-	int		i;
+	int	i;
+	int	j;
 
+	j = 0;
 	i = 0;
-	fd = open(info->pathmap, O_RDONLY);
-	line = get_next_line(fd);
-	while (line)
+	while (i < game->map_info.map_dim.height)
 	{
-		if (!ft_strncmp(line, "W ", 2))
-			i = 2;
-		if (!ft_strncmp(line, "WE ", 3))
-			i = 3;
-		if (i != 0)
-			return (close(fd), addvaluetexture(i, line,
-					&info->map_texture.west));
-		free(line);
-		line = get_next_line(fd);
+		if (!ft_strncmp(game->area[i], "W ", 2))
+			j = 2;
+		if (!ft_strncmp(game->area[i], "WE ", 3))
+			j = 3;
+		if (j != 0)
+			return (addvaluetexture(i, game->area[j],
+					&game->map_info.map_texture.west));
 	}
-	return (close(fd), 1);
+	return (1);
 }
-
-

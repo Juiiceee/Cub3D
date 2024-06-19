@@ -6,13 +6,13 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:32:50 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/19 16:51:29 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/19 17:44:31 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void	createArea(t_game *game)
+int	createArea(t_game *game)
 {
 	int	i;
 	int	fd;
@@ -20,15 +20,21 @@ void	createArea(t_game *game)
 	i = 0;
 	fd = open(game->map_info.pathmap, O_RDONLY);
 	game->area = ft_calloc(game->map_info.map_dim.height, sizeof(char *));
+	if (!game->area)
+		return (1);
+	game->map_info.map_dim.width = ft_calloc(game->map_info.map_dim.height, sizeof(int));
+	if (!game->map_info.map_dim.width)
+		return (1);
 	while (1)
 	{
 		game->area[i] = get_next_line(fd);
-		game->map_info.map_dim.width[i];
+		int oui = ft_strlen(game->area[i]);
+		game->map_info.map_dim.width[i] = oui;
 		if (!game->area[i])
 			break ;
 		i++;
 	}
-	close(fd);
+	return (close(fd), 0);
 }
 
 void	putpos(t_game *game, int x, int y)

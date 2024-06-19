@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/06/19 16:11:23 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/19 17:32:16 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,18 +190,19 @@ int main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		if (checkExtension(argv[1]))
+		if (checkExtension(argv[1], ".cub"))
 			return (1);
-		calculateMapSize(argv[1], &game.mesure.column);
-		if (checkSize(game))
+		if (calculateMapSize(argv[1], &game))
 			return (1);
-		inputArea(argv[1], &game);
-		if (checkAll(&game))
-			return (freetab(&game), 0);
+		if (recomapinfo(&game))
+			return (1);
+		printf("%s\n%s\n%s\n%s\n", game.map_info.map_texture.north, game.map_info.map_texture.east, game.map_info.map_texture.south, game.map_info.map_texture.west);
+		/*if (checkAll(&game))
+			return (freetab(&game), 0);*/
 	}
 	/*int fd = open("maps/good/5*5.cub", O_RDONLY);
 	printf("%s", get_next_line(fd));*/
-	game.mlx_ptr = mlx_init();
+	/*game.mlx_ptr = mlx_init();
 	game.win_ptr = mlx_new_window(game.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Je t'aime Mathieu");
 	game.pos.posx = 1.5;
 	game.pos.posy = 1.5;
@@ -213,7 +214,7 @@ int main(int argc, char **argv)
 	mlx_loop_hook(game.mlx_ptr, main_loop, &game);
 	mlx_hook(game.win_ptr, 02, (1L << 0), &on_keypress, &game);
 	mlx_hook(game.win_ptr, 17, (1L << 17), &on_destroy, &game);
-	mlx_loop(game.mlx_ptr);
+	mlx_loop(game.mlx_ptr);*/
 
 	return 0;
 }

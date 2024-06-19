@@ -6,13 +6,13 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:23:56 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/19 16:51:43 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/19 17:18:58 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void	calculateMapSize(char *pathmap, t_game *game)
+int	calculateMapSize(char *pathmap, t_game *game)
 {
 	int		fd;
 	char	*str;
@@ -29,5 +29,7 @@ void	calculateMapSize(char *pathmap, t_game *game)
 		if (!str)
 			break ;
 	}
-	return (close(fd), free(str));
+	if (createArea(game))
+		return (close(fd), free(str), 1);
+	return (close(fd), free(str), 0);
 }
