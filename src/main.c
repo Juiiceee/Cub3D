@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/06/17 17:55:05 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/19 16:11:23 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,7 @@ int main(int argc, char **argv)
 	{
 		if (checkExtension(argv[1]))
 			return (1);
-		game.mesure.line = calculateMapSize(argv[1], &game.mesure.column);
+		calculateMapSize(argv[1], &game.mesure.column);
 		if (checkSize(game))
 			return (1);
 		inputArea(argv[1], &game);

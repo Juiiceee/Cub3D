@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/17 17:55:15 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/19 16:15:21 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ typedef struct s_game_map_dimension
 {
 	int						height;
 	int						width;
-	char					**area;
 }							t_game_map_dimension;
 
 typedef struct s_game_map_info
@@ -115,7 +114,11 @@ void						putpos(t_game *game, int x, int y);
 
 // mapSize.c
 
-int							calculateMapSize(char *map, int *colonne);
+void						calculateMapSize(char *pathmap, t_game *game);
+
+// mapTexture.c
+
+int							recomapinfo(t_game_map_info *info);
 
 // mapUtils.c
 
@@ -123,7 +126,8 @@ int							error(char *text);
 int							strlenno(char *str);
 int							freeandreturn(char *str);
 void						freetab(t_game *game);
-int							addvaluetexture(int i, char *line, char *map_texture);
+int							addvaluetexture(int i, char *line,
+								char **map_texture);
 
 // get_next_line.c
 

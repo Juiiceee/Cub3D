@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:24:55 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/17 17:57:44 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/18 11:15:54 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	freetab(t_game *game)
 	free(game->area);
 }
 
-int	addvaluetexture(int i, char *line, char *map_texture)
+int	addvaluetexture(int i, char *line, char **map_texture)
 {
 	int j;
 
@@ -60,8 +60,9 @@ int	addvaluetexture(int i, char *line, char *map_texture)
 		i++;
 	while (line[i + j] != ' ')
 		j++;
-	map_texture = ft_substr(line, i, j);
-	if (map_texture)
-		return (free(line), 1);
-	return (0);
+	*map_texture = ft_substr(line, i, j);
+	free(line);
+	if (*map_texture)
+		return (0);
+	return (1);
 }
