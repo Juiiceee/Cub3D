@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/19 16:15:21 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/19 16:40:16 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,6 @@ typedef enum e_bool
 	True
 }							t_bool;
 
-typedef struct s_game_mesure
-{
-	int						line;
-	int						column;
-}							t_game_mesure;
-
 typedef struct s_game_pos
 {
 	float					posx;
@@ -72,7 +66,7 @@ typedef struct s_game_map_color
 typedef struct s_game_map_dimension
 {
 	int						height;
-	int						width;
+	int						*width;
 }							t_game_map_dimension;
 
 typedef struct s_game_map_info
@@ -90,7 +84,6 @@ typedef struct s_game
 	void					*win_ptr;
 	char					**area;
 	t_game_map_info			map_info;
-	t_game_mesure			mesure;
 	t_game_pos				pos;
 }							t_game;
 
@@ -109,7 +102,7 @@ int							checkPlayer(t_game *game);
 // mapCreate.c
 
 void						inputArea(char *map, t_game *game);
-char						**createArea(int ligne, size_t colonne);
+void						createArea(t_game *game);
 void						putpos(t_game *game, int x, int y);
 
 // mapSize.c

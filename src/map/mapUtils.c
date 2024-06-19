@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:24:55 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/18 11:15:54 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/19 16:49:30 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	freetab(t_game *game)
 	int	i;
 
 	i = 0;
-	while (i < game->mesure.line)
+	while (i < game->map_info.map_dim.height)
 	{
 		free(game->area[i]);
 		i++;
