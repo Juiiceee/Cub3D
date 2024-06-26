@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/06/26 12:14:51 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/26 16:53:28 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,7 @@ int main(/*int argc, char **argv*/)
 		printf("%s\n%s\n%s\n%s\n", game.map_info.map_texture.north, game.map_info.map_texture.east, game.map_info.map_texture.south, game.map_info.map_texture.west);
 		/*if (checkAll(&game))
 			return (freetab(&game), 0);*/
+		freeend(&game);
 	}
 	/*int fd = open("maps/good/5*5.cub", O_RDONLY);
 	printf("%s", get_next_line(fd));*/

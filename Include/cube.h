@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/26 14:24:04 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/26 17:04:10 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,9 @@ typedef struct s_game
 }							t_game;
 
 // mapChecker.c
-
 int							checkExtension(char *str, char *extension);
 
 // mapCheckerInput.c
-
 int							checkAll(t_game *game);
 int							checkOtherChar(t_game *game);
 int							checkWall(t_game *game);
@@ -99,27 +97,20 @@ int							addvalueColor(char *line, int *color);
 int							*setColorTab(char **color);
 
 // mapCreate.c
-
 int							createArea(t_game *game);
 void						putpos(t_game *game, int x, int y);
 
 // mapSize.c
-
 int							calculateMapSize(char *pathmap, t_game *game);
 
 // mapTexture.c
-
 int							recomapinfo(t_game *game);
 int							recotexturen(t_game *game);
 int							recotexturee(t_game *game);
 int							recotextures(t_game *game);
 int							recotexturew(t_game *game);
-// mapUtils.c
 
-int							error(char *text);
-int							strlenno(char *str);
-int							freeandreturn(char *str);
-void						freetab(t_game *game);
+// mapUtils.c
 int							addvaluetexture(char *line, char **map_texture);
 
 // initTexture.c
@@ -128,5 +119,15 @@ void						inittexture(t_game *game);
 // get_next_line.c
 
 char						*get_next_line(int fd);
+
+// utils.c
+int							error(char *text);
+int							strlenno(char *str);
+
+// utilsfree.c
+void						freeend(t_game *game);
+int							freeandreturn(char *str);
+void						freetab(char **str);
+void						freeifnotnull(t_game_map_texture *texture);
 
 #endif

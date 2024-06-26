@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:10:56 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/26 14:25:13 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/26 16:58:30 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,14 @@ int	addvalueColor(char *line, int *color)
 		return (1);
 	tab = setColorTab(colorsplit);
 	if (!tab)
-		return (1);
+		return (freetab(colorsplit), 1);
 	while (j < 3)
 	{
 		if (!(tab[j] >= 0 && tab[j++] <= 255))
-			return (1);
+			return (freetab(colorsplit), free(tab), 1);
 	}
 	*color = create_rgb(tab);
-	return (0);
+	return (freetab(colorsplit), free(tab), 0);
 }
 
 int	*setColorTab(char **color)

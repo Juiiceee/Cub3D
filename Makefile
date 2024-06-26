@@ -6,14 +6,14 @@
 #    By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/12 15:57:01 by lbehr             #+#    #+#              #
-#    Updated: 2024/06/26 12:15:38 by lbehr            ###   ########.fr        #
+#    Updated: 2024/06/26 16:53:07 by lbehr            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:= cub3D
 SRC_DIR		:= src
 OBJ_DIR		:= obj
-SRCS		:= gnl/get_next_line.c map/mapSize.c map/mapUtils.c map/mapChecker.c map/mapCreate.c map/mapColor.c map/mapTexture.c main.c init/initTexture.c
+SRCS		:= gnl/get_next_line.c map/mapSize.c map/mapUtils.c utils/utilsfree.c map/mapChecker.c map/mapCreate.c map/mapColor.c map/mapTexture.c main.c init/initTexture.c utils/utils.c
 #alias mc='find ./src -name "*.c" | tr "\n" " " | sed -e "s#\\./src/##g" -e "s/ $//" | xclip -selection clipboard'
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
 OBJS		:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
