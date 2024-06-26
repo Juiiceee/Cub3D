@@ -6,17 +6,90 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:10:56 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/26 12:28:21 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/26 14:25:13 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-/*int	recoColorC(void)
+int	create_rgb(int *tab)
 {
+	return (tab[0] << 16 | tab[1] << 8 | tab[2]);
 }
 
-int	recoColorF(void)
+int	recoColorC(t_game *game)
 {
+	int	i;
+	int	j;
 
-}*/
+	j = 0;
+	i = 0;
+	while (i < game->map_info.map_dim.height)
+	{
+		if (!ft_strncmp(game->area[i], "C ", 2))
+			return (addvalueColor(game->area[i], &game->map_info.color_ceiling));
+		i++;
+	}
+	return (1);
+}
+
+int	recoColorF(t_game *game)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	i = 0;
+	while (i < game->map_info.map_dim.height)
+	{
+		if (!ft_strncmp(game->area[i], "F ", 2))
+			return (addvalueColor(game->area[i], &game->map_info.color_floor));
+		i++;
+	}
+	return (1);
+}
+
+int	addvalueColor(char *line, int *color)
+{
+	int		j;
+	int		i;
+	char	**colorsplit;
+	int		*tab;
+
+	i = 2;
+	j = 0;
+	while (line[i] == ' ')
+		i++;
+	colorsplit = ft_split(line + i, ',');
+	if (!colorsplit)
+		return (1);
+	tab = setColorTab(colorsplit);
+	if (!tab)
+		return (1);
+	while (j < 3)
+	{
+		if (!(tab[j] >= 0 && tab[j++] <= 255))
+			return (1);
+	}
+	*color = create_rgb(tab);
+	return (0);
+}
+
+int	*setColorTab(char **color)
+{
+	int	i;
+	int	*tab;
+
+	i = 0;
+	while (color[i])
+		i++;
+	if (i != 3)
+		return (0);
+	tab = malloc(3 * sizeof(int));
+	if (!tab)
+		return (0);
+	tab[0] = ft_atoi(color[0]);
+	tab[1] = ft_atoi(color[1]);
+	tab[2] = ft_atoi(color[2]);
+	return (tab);
+}
