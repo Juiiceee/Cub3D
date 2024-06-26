@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/06/19 17:32:16 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/26 12:14:51 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,14 +182,16 @@ int	on_keypress(int keycode, t_game *game)
 	return (0);
 }
 
-int main(int argc, char **argv)
+int main(/*int argc, char **argv*/)
 {
 	t_game game;
-	/*char *argv[] = {"caca", "maps/good/5*5.cub", 0};
-	int argc = 2;*/
+	//char *argv[] = {"caca", "maps/good/5*5.cub", 0};
+	char *argv[] = {"caca", "oui.cub", 0};
+	int argc = 2;
 
 	if (argc == 2)
 	{
+		inittexture(&game);
 		if (checkExtension(argv[1], ".cub"))
 			return (1);
 		if (calculateMapSize(argv[1], &game))

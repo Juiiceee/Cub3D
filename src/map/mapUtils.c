@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:24:55 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/19 17:27:24 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/26 12:24:18 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,18 @@ void	freetab(t_game *game)
 	free(game->area);
 }
 
-int	addvaluetexture(int i, char *line, char **map_texture)
+int	addvaluetexture(char *line, char **map_texture)
 {
-	int j;
+	int	j;
+	int	i;
 
+	i = 3;
 	j = 0;
 	while (line[i] == ' ')
 		i++;
-	while (line[i + j] != ' ')
+	while (line[i + j] != ' ' && line[i + j])
 		j++;
 	*map_texture = ft_substr(line, i, j);
-	free(line);
 	if (checkExtension(*map_texture, ".xpm"))
 		return (1);
 	if (*map_texture)

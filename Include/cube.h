@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/19 17:35:34 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/26 12:18:57 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,15 +113,18 @@ int							recomapinfo(t_game *game);
 int							recotexturen(t_game *game);
 int							recotexturee(t_game *game);
 int							recotextures(t_game *game);
-int							recotexturw(t_game *game);
+int							recotexturew(t_game *game);
 // mapUtils.c
 
 int							error(char *text);
 int							strlenno(char *str);
 int							freeandreturn(char *str);
 void						freetab(t_game *game);
-int							addvaluetexture(int i, char *line,
+int							addvaluetexture(char *line,
 								char **map_texture);
+
+// initTexture.c
+void	inittexture(t_game *game);
 
 // get_next_line.c
 
