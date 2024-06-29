@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/29 15:54:16 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/29 17:12:04 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
 # endif
+
+typedef enum e_return
+{
+	SUCCESS,
+	FAILURE
+} t_return ;
 
 typedef enum e_bool
 {
@@ -80,6 +86,10 @@ typedef struct s_game
 	t_game_map_info			map_info;
 	t_game_pos				pos;
 }							t_game;
+
+// mapAreaCreate.c
+int							recoarea(t_game *game);
+int							checkifarea(t_game *game, int *start, int *end);
 
 // mapChecker.c
 int							checkExtension(char *str, char *extension);

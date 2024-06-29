@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:32:50 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/29 15:54:06 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/29 17:23:50 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	createArea(t_game *game)
 
 	i = 0;
 	fd = open(game->map_info.pathmap, O_RDONLY);
-	game->map = ft_calloc(game->map_info.map_dim.height, sizeof(char *));
+	game->map = ft_calloc(game->map_info.map_dim.height + 1, sizeof(char *));
 	if (!game->map)
 		return (close(fd), 1);
-	game->map_info.map_dim.width = ft_calloc(game->map_info.map_dim.height,
+	game->map_info.map_dim.width = ft_calloc(game->map_info.map_dim.height + 1,
 			sizeof(int));
 	if (!game->map_info.map_dim.width)
 		return (close(fd), 1);

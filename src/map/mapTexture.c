@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:38:15 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/29 15:54:06 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/29 17:15:17 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	recomapinfo(t_game *game)
 	if (recotexturen(game) || recotexturee(game) || recotextures(game)
 		|| recotexturew(game) || recoColorF(game) || recoColorC(game))
 		return (1);
-	
+	if (recoarea(game))
+		return (1);
 	return (0);
 }
 

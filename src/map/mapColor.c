@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:10:56 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/26 16:58:30 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/29 17:31:40 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	recoColorC(t_game *game)
 	i = 0;
 	while (i < game->map_info.map_dim.height)
 	{
-		if (!ft_strncmp(game->area[i], "C ", 2))
-			return (addvalueColor(game->area[i], &game->map_info.color_ceiling));
+		if (!ft_strncmp(game->map[i], "C ", 2))
+			return (addvalueColor(game->map[i], &game->map_info.color_ceiling));
 		i++;
 	}
 	return (1);
@@ -42,8 +42,8 @@ int	recoColorF(t_game *game)
 	i = 0;
 	while (i < game->map_info.map_dim.height)
 	{
-		if (!ft_strncmp(game->area[i], "F ", 2))
-			return (addvalueColor(game->area[i], &game->map_info.color_floor));
+		if (!ft_strncmp(game->map[i], "F ", 2))
+			return (addvalueColor(game->map[i], &game->map_info.color_floor));
 		i++;
 	}
 	return (1);
