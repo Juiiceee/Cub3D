@@ -6,13 +6,13 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:32:50 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/29 17:23:50 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/29 17:54:49 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int	createArea(t_game *game)
+int	createmap(t_game *game)
 {
 	int	i;
 	int	fd;

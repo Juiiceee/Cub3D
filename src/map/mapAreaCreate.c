@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 15:55:59 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/29 17:36:31 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/29 18:01:42 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	recoarea(t_game *game)
 	int	j;
 
 	if (checkifarea(game, &i, &j))
+		return (1);
+	if (createarea(game, i, j))
 		return (1);
 	return (0);
 }
@@ -43,4 +45,43 @@ int	checkifarea(t_game *game, int *start, int *end)
 		(*start)++;
 	}
 	return (1);
+}
+
+int	createarea(t_game *game, int start, int end)
+{
+	int	i;
+
+	i = 0;
+	game->area = ft_calloc(end, sizeof(char *));
+	if (!game->area)
+		return (1);
+	while (i < end)
+	{
+		printf("%s", game->map[start + i]);
+		game->area[i] = ft_strdup(game->map[start + i]);
+		if (!game->area[i])
+			return (1);
+		i++;
+	}
+	changevalue(game);
+	return (0);
+}
+
+void	changevalue(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (game->area[i])
+	{
+		j = 0;
+		while (game->area[i][j])
+		{
+			if (ft_isspace(game->area[i][j]))
+				game->area[i][j] = '1';
+			j++;
+		}
+		i++;
+	}
 }

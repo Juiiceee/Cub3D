@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:10:56 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/29 17:31:40 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/29 17:41:45 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	*setColorTab(char **color)
 		i++;
 	if (i != 3)
 		return (0);
-	tab = malloc(3 * sizeof(int));
+	tab = ft_calloc(3,sizeof(int));
 	if (!tab)
 		return (0);
 	tab[0] = ft_atoi(color[0]);

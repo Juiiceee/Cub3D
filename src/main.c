@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/06/29 17:32:05 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/29 17:51:31 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,9 +198,9 @@ int main(/*int argc, char **argv*/)
 			return (1);
 		if (recomapinfo(&game))
 			return (1);
-		//printf("%s\n%s\n%s\n%s\n", game.map_info.map_texture.north, game.map_info.map_texture.east, game.map_info.map_texture.south, game.map_info.map_texture.west);
-		/*if (checkAll(&game))
-			return (freetab(&game), 0);*/
+		int i = 0;
+		while (game.area[i])
+			printf("%s\n", game.area[i]);
 		freeend(&game);
 	}
 	/*int fd = open("maps/good/5*5.cub", O_RDONLY);

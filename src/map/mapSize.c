@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:23:56 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/26 17:05:03 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/29 17:54:49 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	calculateMapSize(char *pathmap, t_game *game)
 		if (!str)
 			break ;
 	}
-	if (createArea(game))
+	if (createmap(game))
 		return (close(fd), free(game->map_info.pathmap), free(str), 1);
 	return (close(fd), free(str), 0);
 }

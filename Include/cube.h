@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/29 17:12:04 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/29 17:56:06 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ typedef struct s_game
 // mapAreaCreate.c
 int							recoarea(t_game *game);
 int							checkifarea(t_game *game, int *start, int *end);
+int							createarea(t_game *game, int start, int end);
+void						changevalue(t_game *game);
 
 // mapChecker.c
 int							checkExtension(char *str, char *extension);
@@ -108,7 +110,7 @@ int							addvalueColor(char *line, int *color);
 int							*setColorTab(char **color);
 
 // mapCreate.c
-int							createArea(t_game *game);
+int							createmap(t_game *game);
 void						putpos(t_game *game, int x, int y);
 
 // mapSize.c
