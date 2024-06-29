@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:40:14 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/11 16:52:33 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/29 15:54:06 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int	checkOtherChar(t_game *game)
 		j = 0;
 		while (j < game->mesure.column)
 		{
-			if (game->area[i][j] != '0' && game->area[i][j] != '1'
-					&& game->area[i][j] != 'N' && game->area[i][j] != 'S'
-					&& game->area[i][j] != 'E' && game->area[i][j] != 'W')
+			if (game->map[i][j] != '0' && game->map[i][j] != '1'
+					&& game->map[i][j] != 'N' && game->map[i][j] != 'S'
+					&& game->map[i][j] != 'E' && game->map[i][j] != 'W')
 				return (True);
 			j++;
 		}
@@ -59,10 +59,10 @@ int	checkWall(t_game *game)
 		j = 0;
 		while (j < game->mesure.column)
 		{
-			if (game->area[0][j] != '1'
-					|| game->area[game->mesure.line - 1][j] != '1'
-					|| game->area[i][0] != '1'
-					|| game->area[i][game->mesure.column - 1] != '1')
+			if (game->map[0][j] != '1'
+					|| game->map[game->mesure.line - 1][j] != '1'
+					|| game->map[i][0] != '1'
+					|| game->map[i][game->mesure.column - 1] != '1')
 				return (1);
 			j++;
 		}
@@ -84,8 +84,8 @@ int	checkPlayer(t_game *game)
 		j = 0;
 		while (j < game->mesure.column)
 		{
-			if (game->area[i][j] == 'N' || game->area[i][j] == 'S'
-				|| game->area[i][j] == 'E' || game->area[i][j] == 'W')
+			if (game->map[i][j] == 'N' || game->map[i][j] == 'S'
+				|| game->map[i][j] == 'E' || game->map[i][j] == 'W')
 			{
 				putpos(game, (int)j, i);
 				player++;

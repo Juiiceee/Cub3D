@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/26 17:04:10 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/29 15:54:16 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_game
 {
 	void					*mlx_ptr;
 	void					*win_ptr;
+	char					**map;
 	char					**area;
 	t_game_map_info			map_info;
 	t_game_pos				pos;
