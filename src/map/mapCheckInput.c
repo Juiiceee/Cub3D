@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:40:14 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 13:27:47 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/30 16:05:32 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,51 +17,51 @@ int	checkall(t_game *game)
 	t_bool	good;
 
 	good = False;
-	if (checkotherchar(game))
+	if (checkotherchar(*game))
 		good = error("Bad Caracter");
-	if (checkwall(game))
+	if (checkwall(*game))
 		good = error("Wall error");
 	if (checkplayer(game))
 		good = error("Player error");
 	return (good);
 }
 
-int	checkotherchar(t_game *game)
+int	checkotherchar(t_game game)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (game->area[i])
+	while (game.area[i])
 	{
 		j = 0;
-		while (game->area[i][j])
+		while (game.area[i][j])
 		{
-			if (game->map[i][j] != '0' && game->map[i][j] != '1'
-				&& game->map[i][j] != 'N' && game->map[i][j] != 'S'
-				&& game->map[i][j] != 'E' && game->map[i][j] != 'W')
-				return (True);
+			if (game.area[i][j] != '0' && game.area[i][j] != '1'
+				&& game.area[i][j] != 'N')
+				return (1);
 			j++;
 		}
 		i++;
 	}
-	return (False);
+	return (0);
 }
 
-int	checkwall(t_game *game)
+int	checkwall(t_game game)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (game->area[i])
+	while (game.area[i])
 	{
 		j = 0;
-		while (game->area[i][j])
+		while (game.area[i][j])
 		{
-			if (game->map[0][j] != '1' || game->map[game->mesure.line
-				- 1][j] != '1' || game->map[i][0] != '1'
-				|| game->map[i][game->mesure.column - 1] != '1')
+			if (game.area[0][j] != '1'
+				|| game.area[game.map_info.area_dim.height - 1][j] != '1'
+				|| game.area[i][0] != '1'
+				|| game.area[i][game.map_info.area_dim.width - 2] != '1')
 				return (1);
 			j++;
 		}
@@ -83,8 +83,7 @@ int	checkplayer(t_game *game)
 		j = 0;
 		while (game->area[i][j])
 		{
-			if (game->map[i][j] == 'N' || game->map[i][j] == 'S'
-				|| game->map[i][j] == 'E' || game->map[i][j] == 'W')
+			if (game->area[i][j] == 'N')
 			{
 				putpos(game, (int)j, i);
 				player++;

@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 14:06:44 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/30 15:50:49 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ typedef struct s_game_map_texture
 	char					*west;
 }							t_game_map_texture;
 
-typedef struct s_game_map_dimension
+typedef struct s_game_area_dimension
 {
 	int						height;
-	int						maxwidth;
-}							t_game_map_dimension;
+	int						width;
+}							t_game_area_dimension;
 
 typedef struct s_game_map_info
 {
@@ -74,7 +74,8 @@ typedef struct s_game_map_info
 	t_game_map_texture		map_texture;
 	int						color_ceiling;
 	int						color_floor;
-	t_game_map_dimension	map_dim;
+	int						heightmap;
+	t_game_area_dimension	area_dim;
 }							t_game_map_info;
 
 typedef struct s_game
@@ -92,15 +93,15 @@ int							recoarea(t_game *game);
 int							checkifarea(t_game *game, int *start, int *end);
 int							createarea(t_game *game, int start, int end);
 void						changevalue(t_game *game);
-void						getmaxwidth(t_game *game, int start, int end);
+void						getareainfo(t_game *game, int start, int end);
 
 // mapChecker.c
 int							checkextension(char *str, char *extension);
 
 // mapCheckerInput.c
 int							checkall(t_game *game);
-int							checkotherchar(t_game *game);
-int							checkwall(t_game *game);
+int							checkotherchar(t_game game);
+int							checkwall(t_game game);
 int							checkplayer(t_game *game);
 
 // mapColor.c

@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:38:15 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 13:26:11 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/30 15:46:29 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	gettexturen(t_game *game)
 
 	j = 0;
 	i = 0;
-	while (i < game->map_info.map_dim.height)
+	while (i < game->map_info.heightmap)
 	{
 		if (!ft_strncmp(game->map[i], "NO ", 3))
 			return (addvaluetexture(game->map[i],
@@ -46,7 +46,7 @@ int	gettexturee(t_game *game)
 
 	j = 0;
 	i = 0;
-	while (i < game->map_info.map_dim.height)
+	while (i < game->map_info.heightmap)
 	{
 		if (!ft_strncmp(game->map[i], "EA ", 3))
 			return (addvaluetexture(game->map[i],
@@ -63,7 +63,7 @@ int	gettextures(t_game *game)
 
 	j = 0;
 	i = 0;
-	while (i < game->map_info.map_dim.height)
+	while (i < game->map_info.heightmap)
 	{
 		if (!ft_strncmp(game->map[i], "SO ", 3))
 			return (addvaluetexture(game->map[i],
@@ -80,7 +80,7 @@ int	gettexturew(t_game *game)
 
 	j = 0;
 	i = 0;
-	while (i < game->map_info.map_dim.height)
+	while (i < game->map_info.heightmap)
 	{
 		if (!ft_strncmp(game->map[i], "WE ", 3))
 			return (addvaluetexture(game->map[j],
