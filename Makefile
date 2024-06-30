@@ -6,7 +6,7 @@
 #    By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/12 15:57:01 by lbehr             #+#    #+#              #
-#    Updated: 2024/06/13 07:08:19 by mda-cunh         ###   ########.fr        #
+#    Updated: 2024/06/30 22:47:05 by mda-cunh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ $(NAME)	:	$(OBJS)
 	$(DIR_DUP)
 	@make -C $(LIBFT) --no-print-directory
 	@make -C $(MLX_PATH) --no-print-directory
-	$(CC) $(OBJS) $(LIBFT)/libft.a $(MINI) -o $(NAME) -lm
+	$(CC) $(OBJS) $(LIBFT)/libft.a $(MINI) -o $(NAME) -lm -lX11 -lXext
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(DIR_DUP)

@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/18 15:18:41 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/01 00:30:26 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,11 @@ typedef struct s_game_ray
 	int 		drawEnd;
 	t_coord_int	start_point;
 	t_coord_int	end_point;
+    int			hit;
 	int			side;
+	int texX;
+    int texWidth;
+    float wallX;
 }	t_game_ray;
 
 typedef struct s_game_texture
@@ -104,8 +108,6 @@ typedef struct s_game
 	t_game_pos		pos;
 	t_game_texture	texture;
 	t_game_texture	img;
-	t_game_texture	floor_texture;
-    t_game_texture	ceiling_texture;
 	t_game_ray		ray;
 }	t_game;
 

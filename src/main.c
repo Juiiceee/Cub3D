@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/06/18 15:38:24 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/01 00:29:41 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,30 +54,6 @@ void load_wall(t_game *game)
 	}
 	texture->data = mlx_get_data_addr(texture->img, &texture->bpp, &texture->size_line, &texture->endian);
 }
-void load_ceilling(t_game *game)
-{
-	t_game_texture *texture = &game->ceiling_texture;
-
-	texture->img = mlx_xpm_file_to_image(game->mlx_ptr, "texture/floor.xpm", &texture->width, &texture->height);
-	if (!texture->img)
-	{
-		fprintf(stderr, "Error loading texture\n");
-		exit(EXIT_FAILURE);
-	}
-	texture->data = mlx_get_data_addr(texture->img, &texture->bpp, &texture->size_line, &texture->endian);
-}
-void load_floor(t_game *game)
-{
-	t_game_texture *texture = &game->floor_texture;
-
-	texture->img = mlx_xpm_file_to_image(game->mlx_ptr, "texture/ceiling.xpm", &texture->width, &texture->height);
-	if (!texture->img)
-	{
-		fprintf(stderr, "Error loading texture\n");
-		exit(EXIT_FAILURE);
-	}
-	texture->data = mlx_get_data_addr(texture->img, &texture->bpp, &texture->size_line, &texture->endian);
-}
 
 void draw_line(t_game *game, int x, int drawStart, int drawEnd, int color)
 {
@@ -87,158 +63,138 @@ void draw_line(t_game *game, int x, int drawStart, int drawEnd, int color)
 	}
 }
 
-void draw_floor_and_ceiling(t_game *game)
+void init_raycast(t_game *game, t_game_ray *rc, int x)
 {
-    for (int y = 0; y < WIN_HEIGHT; y++)
+    rc->cameraX = 2 * x / (float)WIN_WIDTH - 1;
+    rc->rayDir.x = game->pos.dirX + game->pos.planeX * rc->cameraX;
+    rc->rayDir.y = game->pos.dirY + game->pos.planeY * rc->cameraX;
+    rc->map.x = (int)game->pos.posX;
+    rc->map.y = (int)game->pos.posY;
+    rc->deltaDist.x = fabs(1 / rc->rayDir.x);
+    rc->deltaDist.y = fabs(1 / rc->rayDir.y);
+}
+
+void calculate_step(t_game *game, t_game_ray* rc)
+{
+    if (rc->rayDir.x < 0)
     {
-        float rayDirX0 = game->pos.dirX - game->pos.planeX;
-        float rayDirY0 = game->pos.dirY - game->pos.planeY;
-        float rayDirX1 = game->pos.dirX + game->pos.planeX;
-        float rayDirY1 = game->pos.dirY + game->pos.planeY;
+        rc->step.x = -1;
+        rc->sideDist.x = (game->pos.posX - rc->map.x) * rc->deltaDist.x;
+    }
+    else
+    {
+        rc->step.x = 1;
+        rc->sideDist.x = (rc->map.x + 1.0 - game->pos.posX) * rc->deltaDist.x;
+    }
+    if (rc->rayDir.y < 0)
+    {
+        rc->step.y = -1;
+        rc->sideDist.y = (game->pos.posY - rc->map.y) * rc->deltaDist.y;
+    }
+    else
+    {
+        rc->step.y = 1;
+        rc->sideDist.y = (rc->map.y + 1.0 - game->pos.posY) * rc->deltaDist.y;
+    }
+}
 
-        int p = y - WIN_HEIGHT / 2;
+void dda(t_game_ray *rc)
+{
+    rc->hit = 0;
 
-        float posZ = 0.5 * WIN_HEIGHT;
-
-        float rowDistance = posZ / p;
-
-        float floorStepX = rowDistance * (rayDirX1 - rayDirX0) / WIN_WIDTH;
-        float floorStepY = rowDistance * (rayDirY1 - rayDirY0) / WIN_WIDTH;
-
-        float floorX = game->pos.posX + rowDistance * rayDirX0;
-        float floorY = game->pos.posY + rowDistance * rayDirY0;
-
-        for (int x = 0; x < WIN_WIDTH; ++x)
+    while (rc->hit == 0)
+    {
+        if (rc->sideDist.x < rc->sideDist.y)
         {
-            int cellX = (int)floorX;
-            int cellY = (int)floorY;
-
-            int tx = (int)(game->floor_texture.width * (floorX - cellX)) & (game->floor_texture.width - 1);
-            int ty = (int)(game->floor_texture.height * (floorY - cellY)) & (game->floor_texture.height - 1);
-
-            floorX += floorStepX;
-            floorY += floorStepY;
-
-            int floorColor = *(int *)(game->floor_texture.data + (ty * game->floor_texture.size_line + tx * (game->floor_texture.bpp / 8)));
-            int ceilingColor = *(int *)(game->ceiling_texture.data + (ty * game->ceiling_texture.size_line + tx * (game->ceiling_texture.bpp / 8)));
-
-            img_pix_put(&game->img, x, y, floorColor);
-            img_pix_put(&game->img, x, WIN_HEIGHT - y - 1, ceilingColor);
+            rc->sideDist.x += rc->deltaDist.x;
+            rc->map.x += rc->step.x;
+            rc->side = 0;
         }
+        else
+        {
+            rc->sideDist.y += rc->deltaDist.y;
+            rc->map.y += rc->step.y;
+            rc->side = 1;
+        }
+        if (map[rc->map.x][rc->map.y] > 0)
+            rc->hit = 1;
+    }
+}
+
+void calculate_perp_wall_dist(t_game *game, t_game_ray *rc)
+{
+    if (rc->side == 0)
+        rc->perpWallDist = 
+		(rc->map.x - game->pos.posX + (1 - rc->step.x) / 2) / rc->rayDir.x;
+    else
+        rc->perpWallDist = 
+		(rc->map.y - game->pos.posY + (1 - rc->step.y) / 2) / rc->rayDir.y;
+}
+
+void calculate_line_height(t_game_ray *rc)
+{
+    rc->lineHeight = (int)(WIN_HEIGHT / rc->perpWallDist);
+    rc->drawStart = -rc->lineHeight / 2 + WIN_HEIGHT / 2;
+    if (rc->drawStart < 0)
+        rc->drawStart = 0;
+    rc->drawEnd = rc->lineHeight / 2 + WIN_HEIGHT / 2;
+    if (rc->drawEnd >= WIN_HEIGHT)
+        rc->drawEnd = WIN_HEIGHT - 1;
+}
+
+void hit_point_texture(t_game *game, t_game_ray *rc)
+{
+    if (rc->side == 0)
+        rc->wallX = game->pos.posY + rc->perpWallDist * rc->rayDir.y;
+    else
+        rc->wallX = game->pos.posX + rc->perpWallDist * rc->rayDir.x;
+    rc->wallX -= floor(rc->wallX);
+    rc->texWidth = game->texture.width;
+	rc->texX = (int)(rc->wallX * (float)rc->texWidth);
+    if (rc->side == 0 && rc->rayDir.x > 0)
+        rc->texX = rc->texWidth - rc->texX - 1;
+    if (rc->side == 1 && rc->rayDir.y < 0)
+        rc->texX = rc->texWidth - rc->texX - 1;
+
+}
+
+void render_wall(t_game *game, t_game_ray *rc, int x)
+{
+	int y = rc->drawStart;
+	
+	while (y < rc->drawEnd)
+    {
+        int d = y * 256 - WIN_HEIGHT * 128 + rc->lineHeight * 128;
+        int texY = ((d * game->texture.height) / rc->lineHeight) / 256;
+        char *pixel = game->texture.data + (texY * game->texture.size_line 
+                      + rc->texX * (game->texture.bpp / 8));
+        int color = *(int *)pixel;
+        if (rc->side == 1)
+            color = (color >> 1) & 8355711;
+        img_pix_put(&game->img, x, y, color);
+		y++;
     }
 }
 
 void raycast(t_game *game)
 {
-	draw_floor_and_ceiling(game);
-	
-	for (int x = 0; x < WIN_WIDTH; x++)
-	{
-		float cameraX = 2 * x / (float)WIN_WIDTH - 1;
-		float rayDirX = game->pos.dirX + game->pos.planeX * cameraX;
-		float rayDirY = game->pos.dirY + game->pos.planeY * cameraX;
+	int x;
 
-		int mapX = (int)game->pos.posX;
-		int mapY = (int)game->pos.posY;
-
-		float sideDistX;
-		float sideDistY;
-
-		float deltaDistX = fabs(1 / rayDirX);
-		float deltaDistY = fabs(1 / rayDirY);
-		float perpWallDist;
-
-		int stepX;
-		int stepY;
-
-		int hit = 0;
-		int side;
-
-		if (rayDirX < 0)
-		{
-			stepX = -1;
-			sideDistX = (game->pos.posX - mapX) * deltaDistX;
-		}
-		else
-		{
-			stepX = 1;
-			sideDistX = (mapX + 1.0 - game->pos.posX) * deltaDistX;
-		}
-		if (rayDirY < 0)
-		{
-			stepY = -1;
-			sideDistY = (game->pos.posY - mapY) * deltaDistY;
-		}
-		else
-		{
-			stepY = 1;
-			sideDistY = (mapY + 1.0 - game->pos.posY) * deltaDistY;
-		}
-
-		while (hit == 0)
-		{
-			if (sideDistX < sideDistY)
-			{
-				sideDistX += deltaDistX;
-				mapX += stepX;
-				side = 0;
-			}
-			else
-			{
-				sideDistY += deltaDistY;
-				mapY += stepY;
-				side = 1;
-			}
-			if (map[mapX][mapY] > 0)
-				hit = 1;
-		}
-
-		if (side == 0)
-			perpWallDist = (mapX - game->pos.posX + (1 - stepX) / 2) / rayDirX;
-		else
-			perpWallDist = (mapY - game->pos.posY + (1 - stepY) / 2) / rayDirY;
-
-		int lineHeight = (int)(WIN_HEIGHT / perpWallDist);
-
-		int drawStart = -lineHeight / 2 + WIN_HEIGHT / 2;
-		if (drawStart < 0)
-			drawStart = 0;
-		int drawEnd = lineHeight / 2 + WIN_HEIGHT / 2;
-
-		if (drawEnd >= WIN_HEIGHT)
-			drawEnd = WIN_HEIGHT - 1;
-
-		int color = 0xFFFFFF;
-		if (side == 1)
-			color = color / 2;
-
-		int texWidth = game->texture.width;
-
-		float wallX;
-		if (side == 0)
-			wallX = game->pos.posY + perpWallDist * rayDirY;
-		else
-			wallX = game->pos.posX + perpWallDist * rayDirX;
-		wallX -= floor(wallX);
-
-		int texX = (int)(wallX * (float)texWidth);
-		if (side == 0 && rayDirX > 0)
-			texX = texWidth - texX - 1;
-		if (side == 1 && rayDirY < 0)
-			texX = texWidth - texX - 1;
-
-		for (int y = drawStart; y < drawEnd; y++)
-		{
-            int d = y * 256 - WIN_HEIGHT * 128 + lineHeight * 128;
-            int texY = ((d * game->texture.height) / lineHeight) / 256;
-            char *pixel = game->texture.data + (texY * game->texture.size_line + texX * (game->texture.bpp / 8));
-            int color = *(int *)pixel;
-            if (side == 1)
-                color = (color >> 1) & 8355711; // Make y sides darker
-            img_pix_put(&game->img, x, y, color);
-		}
-		// draw_line(game, x, 0, drawStart, 0xFA2FEF);
-		// draw_line(game, x, drawEnd, WIN_HEIGHT, 0x0AC03F);
+	x = 0;	
+    while (x < WIN_WIDTH)
+    {
+    	t_game_ray raycast;
+		
+        init_raycast(game, &raycast, x);
+        calculate_step(game, &raycast);
+        dda(&raycast);
+        calculate_perp_wall_dist(game, &raycast);
+        calculate_line_height(&raycast);
+        hit_point_texture(game, &raycast);
+		render_wall(game, &raycast, x);
+		draw_line(game, x, 0, raycast.drawStart, 0xFA2FEF);
+		draw_line(game, x, raycast.drawEnd, WIN_HEIGHT, 0x0AC03F);
+    	x++;
 	}
 }
 
@@ -296,14 +252,22 @@ int on_keypress(int keycode, t_game *game)
 	}
 	else if (keycode == XK_Left)
 	{
-		head_turn(game, -0.10);
+		head_turn(game, 0.10);
 	}
 	else if (keycode == XK_Right)
 	{
-		head_turn(game, 0.10);
+		head_turn(game, -0.10);
 	}
-	printf("posY = %f || posX = %f\n", game->pos.posY, game->pos.posX);
 	return (0);
+}
+
+void set_fov(t_game *game, double fov_degrees)
+{
+    double fov_radians = (fov_degrees) * M_PI / 180.0;
+    double half_fov_tan = tan(fov_radians / 2.0);
+
+    game->pos.planeX = game->pos.dirY * half_fov_tan;
+    game->pos.planeY = -game->pos.dirX * half_fov_tan;
 }
 
 int main(int argc, char **argv)
@@ -329,17 +293,13 @@ int main(int argc, char **argv)
 	printf("%s", get_next_line(fd));*/
 	game.mlx_ptr = mlx_init();
 	game.win_ptr = mlx_new_window(game.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Je t'aime wikow <3");
-	game.pos.posX = 1.5;
-	game.pos.posY = 1.5;
-	game.pos.dirX = 1;		// 1 south // -1 north
-	game.pos.dirY = 0;		// -1 west // 1 east
-	game.pos.planeX = 0;	// 0.66 west // -0.66 easy
-	game.pos.planeY = 0.66; // 0.66 south // -0.66 north
+    game.pos.posX = 1.5;
+    game.pos.posY = 1.5;
+	game.pos.dirX = 0;
+    game.pos.dirY = 1;
+ 	set_fov(&game, 70);
 
 	load_wall(&game);
-	load_floor(&game);
-	load_ceilling(&game);
-
 	game.img.img = mlx_new_image(game.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	
 	game.img.data = mlx_get_data_addr(game.img.img, &game.img.bpp,
