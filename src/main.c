@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/06/29 17:51:31 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/30 11:55:52 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,7 @@ int main(/*int argc, char **argv*/)
 			return (1);
 		int i = 0;
 		while (game.area[i])
-			printf("%s\n", game.area[i]);
+			printf("%s\n", game.area[i++]);
 		freeend(&game);
 	}
 	/*int fd = open("maps/good/5*5.cub", O_RDONLY);

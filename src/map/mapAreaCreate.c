@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 15:55:59 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/29 18:01:42 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/30 11:55:45 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,17 @@ int	createarea(t_game *game, int start, int end)
 	int	i;
 
 	i = 0;
-	game->area = ft_calloc(end, sizeof(char *));
+	game->area = ft_calloc(end + 1, sizeof(char *));
 	if (!game->area)
 		return (1);
 	while (i < end)
 	{
-		printf("%s", game->map[start + i]);
 		game->area[i] = ft_strdup(game->map[start + i]);
 		if (!game->area[i])
 			return (1);
 		i++;
 	}
+	game->area[i] = NULL;
 	changevalue(game);
 	return (0);
 }
