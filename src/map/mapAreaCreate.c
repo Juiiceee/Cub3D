@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 15:55:59 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 11:55:45 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/30 13:27:57 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	checkifarea(t_game *game, int *start, int *end)
 		if (ft_isdigit(game->map[*start][j]))
 		{
 			j = 0;
-			while (game->map[*start] && ft_strlen(game->map[*start + *end]) != 0)
+			while (game->map[*start] && ft_strlen(game->map[*start
+					+ *end]) != 0)
 				(*end)++;
 			return (0);
 		}
@@ -46,6 +47,8 @@ int	checkifarea(t_game *game, int *start, int *end)
 	}
 	return (1);
 }
+
+// void
 
 int	createarea(t_game *game, int start, int end)
 {
@@ -69,8 +72,8 @@ int	createarea(t_game *game, int start, int end)
 
 void	changevalue(t_game *game)
 {
-	int	i;
-	int	j;
+	int i;
+	int j;
 
 	i = 0;
 	while (game->area[i])

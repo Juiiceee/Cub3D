@@ -6,13 +6,13 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:08:44 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/19 16:57:45 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/30 13:27:10 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int	checkExtension(char *str, char *extension)
+int	checkextension(char *str, char *extension)
 {
 	int		cb;
 	int		i;

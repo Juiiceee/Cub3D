@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:10:56 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/29 17:41:45 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/30 13:25:28 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	create_rgb(int *tab)
 	return (tab[0] << 16 | tab[1] << 8 | tab[2]);
 }
 
-int	recoColorC(t_game *game)
+int	getcolor_c(t_game *game)
 {
 	int	i;
 	int	j;
@@ -27,13 +27,13 @@ int	recoColorC(t_game *game)
 	while (i < game->map_info.map_dim.height)
 	{
 		if (!ft_strncmp(game->map[i], "C ", 2))
-			return (addvalueColor(game->map[i], &game->map_info.color_ceiling));
+			return (addvaluecolor(game->map[i], &game->map_info.color_ceiling));
 		i++;
 	}
 	return (1);
 }
 
-int	recoColorF(t_game *game)
+int	getcolor_f(t_game *game)
 {
 	int	i;
 	int	j;
@@ -43,13 +43,13 @@ int	recoColorF(t_game *game)
 	while (i < game->map_info.map_dim.height)
 	{
 		if (!ft_strncmp(game->map[i], "F ", 2))
-			return (addvalueColor(game->map[i], &game->map_info.color_floor));
+			return (addvaluecolor(game->map[i], &game->map_info.color_floor));
 		i++;
 	}
 	return (1);
 }
 
-int	addvalueColor(char *line, int *color)
+int	addvaluecolor(char *line, int *color)
 {
 	int		j;
 	int		i;
@@ -63,7 +63,7 @@ int	addvalueColor(char *line, int *color)
 	colorsplit = ft_split(line + i, ',');
 	if (!colorsplit)
 		return (1);
-	tab = setColorTab(colorsplit);
+	tab = setcolortab(colorsplit);
 	if (!tab)
 		return (freetab(colorsplit), 1);
 	while (j < 3)
@@ -75,7 +75,7 @@ int	addvalueColor(char *line, int *color)
 	return (freetab(colorsplit), free(tab), 0);
 }
 
-int	*setColorTab(char **color)
+int	*setcolortab(char **color)
 {
 	int	i;
 	int	*tab;

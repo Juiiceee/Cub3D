@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:49:38 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 11:59:41 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/30 13:22:42 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	freeend(t_game *game)
 	freeifnotnull(&game->map_info.map_texture);
 	freetab(game->map);
 	freetab(game->area);
-	free(game->map_info.map_dim.width);
 }
 
 void	freetab(char **str)

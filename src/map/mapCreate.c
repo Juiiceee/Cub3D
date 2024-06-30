@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:32:50 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/29 17:54:49 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/30 13:22:28 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,9 @@ int	createmap(t_game *game)
 	game->map = ft_calloc(game->map_info.map_dim.height + 1, sizeof(char *));
 	if (!game->map)
 		return (close(fd), 1);
-	game->map_info.map_dim.width = ft_calloc(game->map_info.map_dim.height + 1,
-			sizeof(int));
-	if (!game->map_info.map_dim.width)
-		return (close(fd), 1);
 	while (1)
 	{
 		game->map[i] = get_next_line(fd);
-		game->map_info.map_dim.width[i] = ft_strlen(game->map[i]);
 		if (!game->map[i])
 			break ;
 		i++;

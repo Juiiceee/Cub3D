@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/29 17:56:06 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/30 13:27:40 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_game_map_texture
 typedef struct s_game_map_dimension
 {
 	int						height;
-	int						*width;
+	int						maxwidth;
 }							t_game_map_dimension;
 
 typedef struct s_game_map_info
@@ -94,34 +94,34 @@ int							createarea(t_game *game, int start, int end);
 void						changevalue(t_game *game);
 
 // mapChecker.c
-int							checkExtension(char *str, char *extension);
+int							checkextension(char *str, char *extension);
 
 // mapCheckerInput.c
-int							checkAll(t_game *game);
-int							checkOtherChar(t_game *game);
-int							checkWall(t_game *game);
-int							checkPlayer(t_game *game);
+int							checkall(t_game *game);
+int							checkotherchar(t_game *game);
+int							checkwall(t_game *game);
+int							checkplayer(t_game *game);
 
 // mapColor.c
 int							create_rgb(int *tab);
-int							recoColorC(t_game *game);
-int							recoColorF(t_game *game);
-int							addvalueColor(char *line, int *color);
-int							*setColorTab(char **color);
+int							getcolor_c(t_game *game);
+int							getcolor_f(t_game *game);
+int							addvaluecolor(char *line, int *color);
+int							*setcolortab(char **color);
 
 // mapCreate.c
 int							createmap(t_game *game);
 void						putpos(t_game *game, int x, int y);
 
 // mapSize.c
-int							calculateMapSize(char *pathmap, t_game *game);
+int							calculatemapsize(char *pathmap, t_game *game);
 
 // mapTexture.c
-int							recomapinfo(t_game *game);
-int							recotexturen(t_game *game);
-int							recotexturee(t_game *game);
-int							recotextures(t_game *game);
-int							recotexturew(t_game *game);
+int							getmapinfo(t_game *game);
+int							gettexturen(t_game *game);
+int							gettexturee(t_game *game);
+int							gettextures(t_game *game);
+int							gettexturew(t_game *game);
 
 // mapUtils.c
 int							addvaluetexture(char *line, char **map_texture);

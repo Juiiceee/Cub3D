@@ -6,23 +6,23 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:38:15 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/29 17:15:17 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/30 13:26:11 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int	recomapinfo(t_game *game)
+int	getmapinfo(t_game *game)
 {
-	if (recotexturen(game) || recotexturee(game) || recotextures(game)
-		|| recotexturew(game) || recoColorF(game) || recoColorC(game))
+	if (gettexturen(game) || gettexturee(game) || gettextures(game)
+		|| gettexturew(game) || getcolor_f(game) || getcolor_c(game))
 		return (1);
 	if (recoarea(game))
 		return (1);
 	return (0);
 }
 
-int	recotexturen(t_game *game)
+int	gettexturen(t_game *game)
 {
 	int	i;
 	int	j;
@@ -39,7 +39,7 @@ int	recotexturen(t_game *game)
 	return (1);
 }
 
-int	recotexturee(t_game *game)
+int	gettexturee(t_game *game)
 {
 	int	i;
 	int	j;
@@ -56,7 +56,7 @@ int	recotexturee(t_game *game)
 	return (1);
 }
 
-int	recotextures(t_game *game)
+int	gettextures(t_game *game)
 {
 	int	i;
 	int	j;
@@ -73,7 +73,7 @@ int	recotextures(t_game *game)
 	return (1);
 }
 
-int	recotexturew(t_game *game)
+int	gettexturew(t_game *game)
 {
 	int	i;
 	int	j;

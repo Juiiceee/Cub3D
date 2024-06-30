@@ -6,40 +6,40 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:40:14 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/29 15:54:06 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/30 13:27:47 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int	checkAll(t_game *game)
+int	checkall(t_game *game)
 {
 	t_bool	good;
 
 	good = False;
-	if (checkOtherChar(game))
+	if (checkotherchar(game))
 		good = error("Bad Caracter");
-	if (checkWall(game))
+	if (checkwall(game))
 		good = error("Wall error");
-	if (checkPlayer(game))
+	if (checkplayer(game))
 		good = error("Player error");
 	return (good);
 }
 
-int	checkOtherChar(t_game *game)
+int	checkotherchar(t_game *game)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
 	i = 0;
-	while (i < game->mesure.line)
+	while (game->area[i])
 	{
 		j = 0;
-		while (j < game->mesure.column)
+		while (game->area[i][j])
 		{
 			if (game->map[i][j] != '0' && game->map[i][j] != '1'
-					&& game->map[i][j] != 'N' && game->map[i][j] != 'S'
-					&& game->map[i][j] != 'E' && game->map[i][j] != 'W')
+				&& game->map[i][j] != 'N' && game->map[i][j] != 'S'
+				&& game->map[i][j] != 'E' && game->map[i][j] != 'W')
 				return (True);
 			j++;
 		}
@@ -48,21 +48,20 @@ int	checkOtherChar(t_game *game)
 	return (False);
 }
 
-int	checkWall(t_game *game)
+int	checkwall(t_game *game)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
 	i = 0;
-	while (i < game->mesure.line)
+	while (game->area[i])
 	{
 		j = 0;
-		while (j < game->mesure.column)
+		while (game->area[i][j])
 		{
-			if (game->map[0][j] != '1'
-					|| game->map[game->mesure.line - 1][j] != '1'
-					|| game->map[i][0] != '1'
-					|| game->map[i][game->mesure.column - 1] != '1')
+			if (game->map[0][j] != '1' || game->map[game->mesure.line
+				- 1][j] != '1' || game->map[i][0] != '1'
+				|| game->map[i][game->mesure.column - 1] != '1')
 				return (1);
 			j++;
 		}
@@ -71,18 +70,18 @@ int	checkWall(t_game *game)
 	return (0);
 }
 
-int	checkPlayer(t_game *game)
+int	checkplayer(t_game *game)
 {
-	int		i;
-	int		j;
-	int		player;
+	int	i;
+	int	j;
+	int	player;
 
 	i = 0;
 	player = 0;
-	while (i < game->mesure.line)
+	while (game->area[i])
 	{
 		j = 0;
-		while (j < game->mesure.column)
+		while (game->area[i][j])
 		{
 			if (game->map[i][j] == 'N' || game->map[i][j] == 'S'
 				|| game->map[i][j] == 'E' || game->map[i][j] == 'W')
