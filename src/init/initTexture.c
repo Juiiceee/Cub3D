@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 12:09:54 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 13:34:25 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/30 15:48:57 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ void	inittexture(t_game *game)
 
 void	initvalue(t_game *game)
 {
-	game->map_info.map_dim.maxwidth = 0;
+	game->map_info.area_dim.width = 0;
 }
