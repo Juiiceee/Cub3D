@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 15:48:24 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/30 15:50:49 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int							recoarea(t_game *game);
 int							checkifarea(t_game *game, int *start, int *end);
 int							createarea(t_game *game, int start, int end);
 void						changevalue(t_game *game);
-void						getmaxwidth(t_game *game, int start, int end);
+void						getareainfo(t_game *game, int start, int end);
 
 // mapChecker.c
 int							checkextension(char *str, char *extension);

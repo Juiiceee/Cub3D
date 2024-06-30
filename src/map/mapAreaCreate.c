@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 15:55:59 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 15:49:12 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/30 15:53:19 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	recoarea(t_game *game)
 {
-	int	i;
-	int	j;
+	int	start;
+	int	end;
 
-	if (checkifarea(game, &i, &j))
+	if (checkifarea(game, &start, &end))
 		return (1);
-	getmaxwidth(game, i, j);
-	if (createarea(game, i, j))
+	getareainfo(game, start, end);
+	if (createarea(game, start, end))
 		return (1);
 	return (0);
 }
@@ -49,14 +49,16 @@ int	checkifarea(t_game *game, int *start, int *end)
 	return (1);
 }
 
-void	getmaxwidth(t_game *game, int start, int end)
+void	getareainfo(t_game *game, int start, int end)
 {
 	int	i;
 
 	i = 0;
+	game->map_info.area_dim.height = end;
 	while (i < end)
 	{
-		if ((int)ft_strlen(game->map[start + i]) > game->map_info.area_dim.width)
+		if ((int)ft_strlen(game->map[start
+				+ i]) > game->map_info.area_dim.width)
 			game->map_info.area_dim.width = ft_strlen(game->map[start + i]);
 		i++;
 	}
