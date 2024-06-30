@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/07/01 01:05:35 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/01 01:55:52 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,18 @@ void img_pix_put(t_game_texture *img, int x, int y, int color)
 	}
 }
 
-int map[MAP_WIDTH][MAP_HEIGHT] = {
-	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 1, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-};
+// int map[MAP_WIDTH][MAP_HEIGHT] = {
+// 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+// 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+// 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+// 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+// 	{1, 0, 0, 0, 0, 1, 0, 0, 0, 1},
+// 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+// 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+// 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+// 	{1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+// 	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+// };
 
 void load_wall(t_game *game)
 {
@@ -66,10 +66,10 @@ void draw_line(t_game *game, int x, int drawStart, int drawEnd, int color)
 void init_raycast(t_game *game, t_game_ray *rc, int x)
 {
     rc->cameraX = 2 * x / (float)WIN_WIDTH - 1;
-    rc->rayDir.x = game->pos.dirX + game->pos.planeX * rc->cameraX;
-    rc->rayDir.y = game->pos.dirY + game->pos.planeY * rc->cameraX;
-    rc->map.x = (int)game->pos.posX;
-    rc->map.y = (int)game->pos.posY;
+    rc->rayDir.x = game->pos.dirx + game->pos.planex * rc->cameraX;
+    rc->rayDir.y = game->pos.diry + game->pos.planey * rc->cameraX;
+    rc->map.x = (int)game->pos.posx;
+    rc->map.y = (int)game->pos.posy;
     rc->deltaDist.x = fabs(1 / rc->rayDir.x);
     rc->deltaDist.y = fabs(1 / rc->rayDir.y);
 }
@@ -79,26 +79,26 @@ void calculate_step(t_game *game, t_game_ray* rc)
     if (rc->rayDir.x < 0)
     {
         rc->step.x = -1;
-        rc->sideDist.x = (game->pos.posX - rc->map.x) * rc->deltaDist.x;
+        rc->sideDist.x = (game->pos.posx - rc->map.x) * rc->deltaDist.x;
     }
     else
     {
         rc->step.x = 1;
-        rc->sideDist.x = (rc->map.x + 1.0 - game->pos.posX) * rc->deltaDist.x;
+        rc->sideDist.x = (rc->map.x + 1.0 - game->pos.posx) * rc->deltaDist.x;
     }
     if (rc->rayDir.y < 0)
     {
         rc->step.y = -1;
-        rc->sideDist.y = (game->pos.posY - rc->map.y) * rc->deltaDist.y;
+        rc->sideDist.y = (game->pos.posy - rc->map.y) * rc->deltaDist.y;
     }
     else
     {
         rc->step.y = 1;
-        rc->sideDist.y = (rc->map.y + 1.0 - game->pos.posY) * rc->deltaDist.y;
+        rc->sideDist.y = (rc->map.y + 1.0 - game->pos.posy) * rc->deltaDist.y;
     }
 }
 
-void dda(t_game_ray *rc)
+void dda(t_game *game, t_game_ray *rc)
 {
     rc->hit = 0;
 
@@ -116,7 +116,7 @@ void dda(t_game_ray *rc)
             rc->map.y += rc->step.y;
             rc->side = 1;
         }
-        if (map[rc->map.x][rc->map.y] > 0)
+        if (game->area[rc->map.x][rc->map.y] > 0)
             rc->hit = 1;
     }
 }
@@ -125,10 +125,10 @@ void calculate_perp_wall_dist(t_game *game, t_game_ray *rc)
 {
     if (rc->side == 0)
         rc->perpWallDist = 
-		(rc->map.x - game->pos.posX + (1 - rc->step.x) / 2) / rc->rayDir.x;
+		(rc->map.x - game->pos.posx + (1 - rc->step.x) / 2) / rc->rayDir.x;
     else
         rc->perpWallDist = 
-		(rc->map.y - game->pos.posY + (1 - rc->step.y) / 2) / rc->rayDir.y;
+		(rc->map.y - game->pos.posy + (1 - rc->step.y) / 2) / rc->rayDir.y;
 }
 
 void calculate_line_height(t_game_ray *rc)
@@ -145,9 +145,9 @@ void calculate_line_height(t_game_ray *rc)
 void hit_point_texture(t_game *game, t_game_ray *rc)
 {
     if (rc->side == 0)
-        rc->wallX = game->pos.posY + rc->perpWallDist * rc->rayDir.y;
+        rc->wallX = game->pos.posy + rc->perpWallDist * rc->rayDir.y;
     else
-        rc->wallX = game->pos.posX + rc->perpWallDist * rc->rayDir.x;
+        rc->wallX = game->pos.posx + rc->perpWallDist * rc->rayDir.x;
     rc->wallX -= floor(rc->wallX);
     rc->texWidth = game->texture.width;
 	rc->texX = (int)(rc->wallX * (float)rc->texWidth);
@@ -187,7 +187,7 @@ void raycast(t_game *game)
 		
         init_raycast(game, &raycast, x);
         calculate_step(game, &raycast);
-        dda(&raycast);
+        dda(game, &raycast);
         calculate_perp_wall_dist(game, &raycast);
         calculate_line_height(&raycast);
         hit_point_texture(game, &raycast);
@@ -215,15 +215,15 @@ int on_destroy(t_game *game)
 
 void head_turn(t_game *game, float angle)
 {
-	float oldDirX = game->pos.dirX;
-	game->pos.dirX = game->pos.dirX * cos(angle) - game->pos.dirY * sin(angle);
-	game->pos.dirY = oldDirX * sin(angle) + game->pos.dirY * cos(angle);
+	float oldDirX = game->pos.dirx;
+	game->pos.dirx = game->pos.dirx * cos(angle) - game->pos.diry * sin(angle);
+	game->pos.diry = oldDirX * sin(angle) + game->pos.diry * cos(angle);
 
-	float oldPlaneX = game->pos.planeX;
-	game->pos.planeX = game->pos.planeX * cos(angle) - game->pos.planeY * sin(angle);
-	game->pos.planeY = oldPlaneX * sin(angle) + game->pos.planeY * cos(angle);
-	// printf("dirY = %f || dirX = %f\n", game->dirY, game->dirX);
-	// printf("planeY = %f || planeX = %f\n", game->planeY, game->planeX);
+	float oldPlaneX = game->pos.planex;
+	game->pos.planex = game->pos.planex * cos(angle) - game->pos.planey * sin(angle);
+	game->pos.planey = oldPlaneX * sin(angle) + game->pos.planey * cos(angle);
+	// printf("diry = %f || dirx = %f\n", game->diry, game->dirx);
+	// printf("planey = %f || planex = %f\n", game->planey, game->planex);
 }
 
 int on_keypress(int keycode, t_game *game)
@@ -232,23 +232,23 @@ int on_keypress(int keycode, t_game *game)
 		on_destroy(game);
 	else if (keycode == XK_a)
 	{
-		game->pos.posX -= game->pos.planeX * 0.10;
-		game->pos.posY -= game->pos.planeY * 0.10;
+		game->pos.posx -= game->pos.planex * 0.10;
+		game->pos.posy -= game->pos.planey * 0.10;
 	}
 	else if (keycode == XK_d)
 	{
-		game->pos.posX += game->pos.planeX * 0.10;
-		game->pos.posY += game->pos.planeY * 0.10;
+		game->pos.posx += game->pos.planex * 0.10;
+		game->pos.posy += game->pos.planey * 0.10;
 	}
 	else if (keycode == XK_s || keycode == XK_Down)
 	{
-		game->pos.posX -= game->pos.dirX * 0.10;
-		game->pos.posY -= game->pos.dirY * 0.10;
+		game->pos.posx -= game->pos.dirx * 0.10;
+		game->pos.posy -= game->pos.diry * 0.10;
 	}
 	else if (keycode == XK_w || keycode == XK_Up)
 	{
-		game->pos.posX += game->pos.dirX * 0.10;
-		game->pos.posY += game->pos.dirY * 0.10;
+		game->pos.posx += game->pos.dirx * 0.10;
+		game->pos.posy += game->pos.diry * 0.10;
 	}
 	else if (keycode == XK_Left)
 	{
@@ -258,6 +258,7 @@ int on_keypress(int keycode, t_game *game)
 	{
 		head_turn(game, -0.10);
 	}
+	printf("%f || %f\n", game->pos.posx, game->pos.posy);
 	return (0);
 }
 
@@ -266,55 +267,13 @@ void set_fov(t_game *game, double fov_degrees)
     double fov_radians = (fov_degrees) * M_PI / 180.0;
     double half_fov_tan = tan(fov_radians / 2.0);
 
-    game->pos.planeX = game->pos.dirY * half_fov_tan;
-    game->pos.planeY = -game->pos.dirX * half_fov_tan;
+    game->pos.planex = game->pos.diry * half_fov_tan;
+    game->pos.planey = -game->pos.dirx * half_fov_tan;
 }
 
 int main(int argc, char **argv)
 {
 	t_game game;
-	(void) argc;
-	(void) argv;
-	/*char *argv[] = {"caca", "maps/good/5*5.cub", 0};
-	int argc = 2;*/
-
-	// if (argc == 2)
-	// {
-	// 	if (checkExtension(argv[1]))
-	// 		return (1);
-	// 	game.mesure.line = calculawallpaperteMapSize(argv[1], &game.mesure.column);
-	// 	if (checkSize(game))
-	// 		return (1);
-	// 	inputArea(argv[1], &game);
-	// 	if (checkAll(&game))
-	// 		return (freeTab(&game), 0);
-	// }
-	/*int fd = open("maps/good/5*5.cub", O_RDONLY);
-	printf("%s", get_next_line(fd));*/
-	game.mlx_ptr = mlx_init();
-	game.win_ptr = mlx_new_window(game.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Je t'aime wikow <3");
-    game.pos.posX = 1.5;
-    game.pos.posY = 1.5;
-	game.pos.dirX = 0;
-    game.pos.dirY = 1;
- 	set_fov(&game, 70);
-
-	load_wall(&game);
-	game.img.img = mlx_new_image(game.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
-	
-	game.img.data = mlx_get_data_addr(game.img.img, &game.img.bpp,
-			&game.img.size_line, &game.img.endian);
-
-
-	mlx_loop_hook(game.mlx_ptr, main_loop, &game);
-	mlx_hook(game.win_ptr, 02, (1L << 0), &on_keypress, &game);
-	mlx_hook(game.win_ptr, 17, (1L << 17), &on_destroy, &game);
-	mlx_loop(game.mlx_ptr);
-
-int main(int argc, char **argv)
-{
-	t_game game;
-
 	if (argc == 2)
 	{
 		initall(&game);
@@ -329,7 +288,24 @@ int main(int argc, char **argv)
 		int i = 0;
 		while (game.area[i])
 			printf("%s\n", game.area[i++]);
-		freeend(&game);
 	}
+	game.mlx_ptr = mlx_init();
+	game.win_ptr = mlx_new_window(game.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Je t'aime wikow <3");
+	game.pos.dirx = 0;
+    game.pos.diry = 1;
+ 	set_fov(&game, 70);
+
+	load_wall(&game);
+	game.img.img = mlx_new_image(game.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	
+	game.img.data = mlx_get_data_addr(game.img.img, &game.img.bpp,
+			&game.img.size_line, &game.img.endian);
+
+
+	mlx_loop_hook(game.mlx_ptr, main_loop, &game);
+	mlx_hook(game.win_ptr, 02, (1L << 0), &on_keypress, &game);
+	mlx_hook(game.win_ptr, 17, (1L << 17), &on_destroy, &game);
+	mlx_loop(game.mlx_ptr);
+	freeend(&game);
 	return 0;
 }

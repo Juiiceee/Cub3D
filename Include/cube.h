@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/01 01:07:46 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/01 01:16:17 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,6 @@ typedef struct s_game_mesure
 	int	line;
 	int	column;
 }	t_game_mesure;
-
-typedef struct s_game_pos
-{
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
-}	t_game_pos;
-}							t_bool;
 
 typedef struct s_game_pos
 {
@@ -145,20 +134,15 @@ typedef struct s_game
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
+	char					**map;
 	char			**area;
 	t_game_mesure	mesure;
 	t_game_pos		pos;
 	t_game_texture	texture;
 	t_game_texture	img;
 	t_game_ray		ray;
-}	t_game;
-	void					*mlx_ptr;
-	void					*win_ptr;
-	char					**map;
-	char					**area;
 	t_game_map_info			map_info;
-	t_game_pos				pos;
-}							t_game;
+}	t_game;
 
 // mapAreaCreate.c
 int							recoarea(t_game *game);
