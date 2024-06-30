@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapCreate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:32:50 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 15:46:29 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/01 00:58:20 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ int	createmap(t_game *game)
 
 void	putpos(t_game *game, int x, int y)
 {
-	game->pos.posx = x;
-	game->pos.posy = y;
+	game->pos.posx = x + 0.5;
+	game->pos.posy = y + 0.5;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapColor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:10:56 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 15:46:29 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/01 00:35:10 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ int	create_rgb(int *tab)
 int	getcolor_c(t_game *game)
 {
 	int	i;
-	int	j;
 
-	j = 0;
 	i = 0;
 	while (i < game->map_info.heightmap)
 	{
@@ -36,9 +34,7 @@ int	getcolor_c(t_game *game)
 int	getcolor_f(t_game *game)
 {
 	int	i;
-	int	j;
-
-	j = 0;
+	
 	i = 0;
 	while (i < game->map_info.heightmap)
 	{

@@ -3,20 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/06/30 15:56:48 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/01 01:00:12 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "cube.h"
 
-int main(/*int argc, char **argv*/)
+int main(int argc, char **argv)
 {
 	t_game game;
-	char *argv[] = {"caca", "oui.cub", 0};
-	int argc = 2;
 
 	if (argc == 2)
 	{

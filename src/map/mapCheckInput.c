@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapCheckInput.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:40:14 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 16:05:32 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/01 00:56:38 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	checkall(t_game *game)
 	good = False;
 	if (checkotherchar(*game))
 		good = error("Bad Caracter");
-	if (checkwall(*game))
-		good = error("Wall error");
+	// if (checkwall(*game))
+	// 	good = error("Wall error");
 	if (checkplayer(game))
 		good = error("Player error");
 	return (good);

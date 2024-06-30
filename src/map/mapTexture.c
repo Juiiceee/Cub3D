@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapTexture.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:38:15 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 15:46:29 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/01 00:54:19 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	getmapinfo(t_game *game)
 {
-	if (gettexturen(game) || gettexturee(game) || gettextures(game)
-		|| gettexturew(game) || getcolor_f(game) || getcolor_c(game))
-		return (1);
+	// if (gettexturen(game) || gettexturee(game) || gettextures(game)
+	// 	|| gettexturew(game) || getcolor_f(game) || getcolor_c(game))
+	// 	return (1);
 	if (recoarea(game))
 		return (1);
 	return (0);
@@ -25,9 +25,7 @@ int	getmapinfo(t_game *game)
 int	gettexturen(t_game *game)
 {
 	int	i;
-	int	j;
 
-	j = 0;
 	i = 0;
 	while (i < game->map_info.heightmap)
 	{
@@ -42,9 +40,7 @@ int	gettexturen(t_game *game)
 int	gettexturee(t_game *game)
 {
 	int	i;
-	int	j;
-
-	j = 0;
+	
 	i = 0;
 	while (i < game->map_info.heightmap)
 	{
@@ -59,9 +55,7 @@ int	gettexturee(t_game *game)
 int	gettextures(t_game *game)
 {
 	int	i;
-	int	j;
-
-	j = 0;
+	
 	i = 0;
 	while (i < game->map_info.heightmap)
 	{
