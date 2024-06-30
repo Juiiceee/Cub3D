@@ -15,6 +15,7 @@ SRC = ft_bzero.c \
 		ft_memmove.c \
 		ft_strlen.c \
 		ft_strlcat.c \
+		ft_isspace.c \
 		ft_strlcpy.c \
 		ft_toupper.c \
 		ft_tolower.c \

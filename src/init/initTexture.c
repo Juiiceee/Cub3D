@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mapCreate.c                                        :+:      :+:    :+:   */
+/*   initTexture.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/11 15:32:50 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 13:22:28 by lbehr            ###   ########.fr       */
+/*   Created: 2024/06/26 12:09:54 by lbehr             #+#    #+#             */
+/*   Updated: 2024/06/30 13:34:25 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int	createmap(t_game *game)
+void	initall(t_game *game)
 {
-	int	i;
-	int	fd;
-
-	i = 0;
-	fd = open(game->map_info.pathmap, O_RDONLY);
-	game->map = ft_calloc(game->map_info.map_dim.height + 1, sizeof(char *));
-	if (!game->map)
-		return (close(fd), 1);
-	while (1)
-	{
-		game->map[i] = get_next_line(fd);
-		if (!game->map[i])
-			break ;
-		i++;
-	}
-	return (close(fd), 0);
+	inittexture(game);
+	initvalue(game);
 }
 
-void	putpos(t_game *game, int x, int y)
+void	inittexture(t_game *game)
 {
-	game->pos.posx = x;
-	game->pos.posy = y;
+	game->map_info.map_texture.east = NULL;
+	game->map_info.map_texture.south = NULL;
+	game->map_info.map_texture.west = NULL;
+	game->map_info.map_texture.north = NULL;
+}
+
+void	initvalue(t_game *game)
+{
+	game->map_info.map_dim.maxwidth = 0;
 }
