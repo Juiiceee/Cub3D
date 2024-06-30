@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 13:34:33 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/30 14:06:44 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int							recoarea(t_game *game);
 int							checkifarea(t_game *game, int *start, int *end);
 int							createarea(t_game *game, int start, int end);
 void						changevalue(t_game *game);
+void						getmaxwidth(t_game *game, int start, int end);
 
 // mapChecker.c
 int							checkextension(char *str, char *extension);
@@ -138,6 +139,7 @@ char						*get_next_line(int fd);
 // utils.c
 int							error(char *text);
 int							strlenno(char *str);
+char						*ft_strdup_size(const char *s, int size);
 
 // utilsfree.c
 void						freeend(t_game *game);
