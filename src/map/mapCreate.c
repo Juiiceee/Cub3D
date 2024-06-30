@@ -6,50 +6,34 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:32:50 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/13 07:07:06 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/01 00:58:20 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-void	inputArea(char *map, t_game *game)
+int	createmap(t_game *game)
 {
-	int		fd;
-	int		i;
-	char	*text;
+	int	i;
+	int	fd;
 
 	i = 0;
-	fd = open(map, O_RDONLY);
-	game->area = createArea(game->mesure.line,
-			game->mesure.column);
-	while (i < game->mesure.line)
+	fd = open(game->map_info.pathmap, O_RDONLY);
+	game->map = ft_calloc(game->map_info.heightmap + 1, sizeof(char *));
+	if (!game->map)
+		return (close(fd), 1);
+	while (1)
 	{
-		text = get_next_line(fd);
-		game->area[i] = ft_strncpy(game->area[i],
-				text, game->mesure.column);
-		free(text);
+		game->map[i] = get_next_line(fd);
+		if (!game->map[i])
+			break ;
 		i++;
 	}
-	close(fd);
-}
-
-char	**createArea(int ligne, size_t colonne)
-{
-	char	**area;
-	int		i;
-
-	i = 0;
-	area = ft_calloc(ligne, sizeof(char *));
-	while (i < ligne)
-	{
-		area[i] = ft_calloc(colonne + 1, 1);
-		i++;
-	}
-	return (area);
+	return (close(fd), 0);
 }
 
 void	putpos(t_game *game, int x, int y)
 {
-	game->pos.posX = x;
-	game->pos.posY = y;
+	game->pos.posx = x + 0.5;
+	game->pos.posy = y + 0.5;
 }

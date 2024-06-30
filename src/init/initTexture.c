@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mapUtils.c                                         :+:      :+:    :+:   */
+/*   initTexture.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/11 13:24:55 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 13:27:10 by lbehr            ###   ########.fr       */
+/*   Created: 2024/06/26 12:09:54 by lbehr             #+#    #+#             */
+/*   Updated: 2024/06/30 15:48:57 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int	addvaluetexture(char *line, char **map_texture)
+void	initall(t_game *game)
 {
-	int	j;
-	int	i;
+	inittexture(game);
+	initvalue(game);
+}
 
-	i = 3;
-	j = 0;
-	while (line[i] == ' ' && line[i])
-		i++;
-	while (line[i + j] != ' ' && line[i + j] && line[i + j] != '\n')
-		j++;
-	*map_texture = ft_substr(line, i, j);
-	if (checkextension(*map_texture, ".xpm"))
-		return (1);
-	if (*map_texture)
-		return (0);
-	return (1);
+void	inittexture(t_game *game)
+{
+	game->map_info.map_texture.east = NULL;
+	game->map_info.map_texture.south = NULL;
+	game->map_info.map_texture.west = NULL;
+	game->map_info.map_texture.north = NULL;
+}
+
+void	initvalue(t_game *game)
+{
+	game->map_info.area_dim.width = 0;
 }

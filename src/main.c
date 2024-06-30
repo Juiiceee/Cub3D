@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/07/01 00:29:41 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/01 01:05:35 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,5 +311,25 @@ int main(int argc, char **argv)
 	mlx_hook(game.win_ptr, 17, (1L << 17), &on_destroy, &game);
 	mlx_loop(game.mlx_ptr);
 
+int main(int argc, char **argv)
+{
+	t_game game;
+
+	if (argc == 2)
+	{
+		initall(&game);
+		if (checkextension(argv[1], ".cub"))
+			return (1);
+		if (calculatemapsize(argv[1], &game))
+			return (1);
+		if (getmapinfo(&game))
+			return (1);
+		if (checkall(&game))
+			return (1);
+		int i = 0;
+		while (game.area[i])
+			printf("%s\n", game.area[i++]);
+		freeend(&game);
+	}
 	return 0;
 }

@@ -6,20 +6,20 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:08:44 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/11 16:52:49 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/30 13:27:10 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int	checkExtension(char	*str)
+int	checkextension(char *str, char *extension)
 {
 	int		cb;
 	int		i;
 	char	*ext;
 	int		fd;
 
-	ext = ft_strdup(".cub");
+	ext = ft_strdup(extension);
 	cb = 0;
 	i = 0;
 	if (str[i] == '.')
@@ -38,13 +38,4 @@ int	checkExtension(char	*str)
 		return (0);
 	}
 	return (error("La map n'a pas la bonne extension"));
-}
-
-int	checkSize(t_game game)
-{
-	if (game.mesure.line == 0)
-		return (error("La saisie n'est pas un rectangle"));
-	else if (game.mesure.column > 38 || game.mesure.line > 20)
-		return (error("La saisie est trop grande pour l'ecran"));
-	return (0);
 }
