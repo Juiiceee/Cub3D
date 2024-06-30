@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:40:14 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 15:48:24 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/06/30 16:05:32 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ int	checkwall(t_game game)
 		while (game.area[i][j])
 		{
 			if (game.area[0][j] != '1'
-				|| game.area[game.map_info.area_dim.width - 1][j] != '1'
+				|| game.area[game.map_info.area_dim.height - 1][j] != '1'
 				|| game.area[i][0] != '1'
-				|| game.area[i][ft_strlen(game.area[0]) - 1] != '1')
+				|| game.area[i][game.map_info.area_dim.width - 2] != '1')
 				return (1);
 			j++;
 		}
