@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 15:55:59 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/01 13:24:06 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/01 14:11:50 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	checkifarea(t_game *game, int *start, int *end)
 		j = 0;
 		while (game->map[*start][j] && ft_isspace(game->map[*start][j]))
 			j++;
-		if (game->map[*start][j] == '1')
+		if (ft_isdigit(game->map[*start][j]))
 		{
 			j = 0;
 			while (game->map[*start] && ft_strlen(game->map[*start

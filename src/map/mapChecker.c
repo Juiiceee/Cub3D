@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:08:44 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 13:27:10 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/01 13:55:41 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	checkextension(char *str, char *extension)
 	ext = ft_strdup(extension);
 	cb = 0;
 	i = 0;
+	if (!str[0])
+		return (free(ext), error("Le fichier ne peut pas etre ouvert"));
 	if (str[i] == '.')
 		i++;
 	while (str[i] != '.')
@@ -34,8 +36,7 @@ int	checkextension(char *str, char *extension)
 		fd = open(str, O_RDONLY);
 		if (fd < 0 || read(fd, 0, 0) < 0)
 			return (error("Le fichier ne peut pas etre ouvert"));
-		close(fd);
-		return (0);
+		return (close(fd), 0);
 	}
 	return (error("La map n'a pas la bonne extension"));
 }

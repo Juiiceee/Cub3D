@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:38:15 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/01 13:26:05 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/01 13:48:06 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ int	getmapinfo(t_game *game)
 int	gettexturen(t_game *game)
 {
 	int	i;
-	int	j;
 
-	j = 0;
 	i = 0;
 	while (i < game->map_info.heightmap)
 	{
@@ -42,9 +40,7 @@ int	gettexturen(t_game *game)
 int	gettexturee(t_game *game)
 {
 	int	i;
-	int	j;
 
-	j = 0;
 	i = 0;
 	while (i < game->map_info.heightmap)
 	{
@@ -59,9 +55,7 @@ int	gettexturee(t_game *game)
 int	gettextures(t_game *game)
 {
 	int	i;
-	int	j;
 
-	j = 0;
 	i = 0;
 	while (i < game->map_info.heightmap)
 	{
@@ -76,14 +70,12 @@ int	gettextures(t_game *game)
 int	gettexturew(t_game *game)
 {
 	int	i;
-	int	j;
 
-	j = 0;
 	i = 0;
 	while (i < game->map_info.heightmap)
 	{
 		if (!ft_strncmp(game->map[i], "WE ", 3))
-			return (addvaluetexture(game->map[j],
+			return (addvaluetexture(game->map[i],
 					&game->map_info.map_texture.west));
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:10:56 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/01 13:30:34 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/01 14:09:58 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	addvaluecolor(char *line, int *color)
 		return (error("Probleme allocation"));
 	tab = setcolortab(colorsplit);
 	if (!tab)
-		return (freetab(colorsplit), error("Probleme allocation"));
+		return (freetab(colorsplit), 1);
 	while (j < 3)
 	{
 		if (!(tab[j] >= 0 && tab[j++] <= 255))
@@ -85,12 +85,18 @@ int	*setcolortab(char **color)
 	while (color[i])
 		i++;
 	if (i != 3)
-		return (0);
+		return ((void)error("Mauvaise separation"), NULL);
 	tab = ft_calloc(3, sizeof(int));
 	if (!tab)
-		return (NULL);
-	tab[0] = ft_atoi(color[0]);
-	tab[1] = ft_atoi(color[1]);
-	tab[2] = ft_atoi(color[2]);
+		return ((void)error("Probleme allocation"), NULL);
+	tab[0] = ft_atoiAlpha(color[0]);
+	if (tab[0] == -1)
+		return ((void)error("Mauvais saisie"), free(tab), NULL);
+	tab[1] = ft_atoiAlpha(color[1]);
+	if (tab[1] == -1)
+		return ((void)error("Mauvais saisie"), free(tab), NULL);
+	tab[2] = ft_atoiAlpha(color[2]);
+	if (tab[2] == -1)
+		return ((void)error("Mauvais saisie"), free(tab), NULL);
 	return (tab);
 }

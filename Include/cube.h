@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/01 13:33:29 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/01 14:02:31 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ char						*get_next_line(int fd);
 int							error(char *text);
 int							strlenno(char *str);
 char						*ft_strdup_size(const char *s, int size);
+int							ft_atoiAlpha(const char *nptr);
 
 // utilsfree.c
 void						freeend(t_game *game);

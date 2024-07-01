@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:48:02 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 14:39:27 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/01 14:06:18 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,31 @@ char	*ft_strdup_size(const char *s, int size)
 	}
 	dup[i] = '\0';
 	return (dup);
+}
+
+int	ft_atoiAlpha(const char *nptr)
+{
+	long	nbr;
+	long	neg;
+	int		i;
+
+	nbr = 0;
+	neg = 1;
+	i = 0;
+	while ((nptr[i] <= 13 && nptr[i] >= 9) || nptr[i] == 32)
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
+	{
+		if (nptr[i] == '-')
+			neg *= -1;
+		i++;
+	}
+	else if (ft_isalpha(nptr[i]))
+		return (-1);
+	while ((nptr[i] >= '0') && (nptr[i] <= '9'))
+	{
+		nbr = nbr * 10 + nptr[i] - 48;
+		i++;
+	}
+	return (nbr * neg);
 }
