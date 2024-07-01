@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 15:50:49 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/01 13:33:29 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int							gettexturew(t_game *game);
 // mapUtils.c
 int							addvaluetexture(char *line, char **map_texture);
 
-// initTexture.c
+// init.c
 void						initall(t_game *game);
 void						inittexture(t_game *game);
 void						initvalue(t_game *game);

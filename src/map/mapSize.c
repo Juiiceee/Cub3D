@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 14:23:56 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 15:46:29 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/01 13:32:01 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	calculatemapsize(char *pathmap, t_game *game)
 
 	game->map_info.pathmap = ft_strdup(pathmap);
 	if (!game->map_info.pathmap)
-		return (1);
+		return (error("Probleme allocation"));
 	game->map_info.heightmap = 0;
 	fd = open(game->map_info.pathmap, O_RDONLY);
 	str = get_next_line(fd);

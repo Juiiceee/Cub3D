@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:10:56 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 15:46:29 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/01 13:30:34 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	getcolor_c(t_game *game)
 			return (addvaluecolor(game->map[i], &game->map_info.color_ceiling));
 		i++;
 	}
-	return (1);
+	return (error("Probleme couleur plafond"));
 }
 
 int	getcolor_f(t_game *game)
@@ -46,7 +46,7 @@ int	getcolor_f(t_game *game)
 			return (addvaluecolor(game->map[i], &game->map_info.color_floor));
 		i++;
 	}
-	return (1);
+	return (error("Probleme couleur sol"));
 }
 
 int	addvaluecolor(char *line, int *color)
@@ -62,14 +62,15 @@ int	addvaluecolor(char *line, int *color)
 		i++;
 	colorsplit = ft_split(line + i, ',');
 	if (!colorsplit)
-		return (1);
+		return (error("Probleme allocation"));
 	tab = setcolortab(colorsplit);
 	if (!tab)
-		return (freetab(colorsplit), 1);
+		return (freetab(colorsplit), error("Probleme allocation"));
 	while (j < 3)
 	{
 		if (!(tab[j] >= 0 && tab[j++] <= 255))
-			return (freetab(colorsplit), free(tab), 1);
+			return (freetab(colorsplit), free(tab),
+				error("Intervalle couleur invalide"));
 	}
 	*color = create_rgb(tab);
 	return (freetab(colorsplit), free(tab), 0);
@@ -85,9 +86,9 @@ int	*setcolortab(char **color)
 		i++;
 	if (i != 3)
 		return (0);
-	tab = ft_calloc(3,sizeof(int));
+	tab = ft_calloc(3, sizeof(int));
 	if (!tab)
-		return (0);
+		return (NULL);
 	tab[0] = ft_atoi(color[0]);
 	tab[1] = ft_atoi(color[1]);
 	tab[2] = ft_atoi(color[2]);

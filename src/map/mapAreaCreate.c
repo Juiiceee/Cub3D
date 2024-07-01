@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 15:55:59 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 16:03:32 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/01 13:24:06 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	recoarea(t_game *game)
 	int	end;
 
 	if (checkifarea(game, &start, &end))
-		return (1);
+		return (error("No area"));
 	getareainfo(game, start, end);
 	if (createarea(game, start, end))
-		return (1);
+		return (error("Probleme allocation"));
 	return (0);
 }
 
@@ -36,7 +36,7 @@ int	checkifarea(t_game *game, int *start, int *end)
 		j = 0;
 		while (game->map[*start][j] && ft_isspace(game->map[*start][j]))
 			j++;
-		if (ft_isdigit(game->map[*start][j]))
+		if (game->map[*start][j] == '1')
 		{
 			j = 0;
 			while (game->map[*start] && ft_strlen(game->map[*start
