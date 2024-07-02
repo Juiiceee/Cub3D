@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/07/01 01:55:52 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/02 21:31:38 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void dda(t_game *game, t_game_ray *rc)
             rc->map.y += rc->step.y;
             rc->side = 1;
         }
-        if (game->area[rc->map.x][rc->map.y] > 0)
+        if (game->area[rc->map.x][rc->map.y] != '0')
             rc->hit = 1;
     }
 }
@@ -207,9 +207,12 @@ int main_loop(t_game *game)
 
 int on_destroy(t_game *game)
 {
+	mlx_destroy_image(game->mlx_ptr, game->img.img);
+	mlx_destroy_image(game->mlx_ptr, game->texture.img);
 	mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 	mlx_destroy_display(game->mlx_ptr);
 	free(game->mlx_ptr);
+	freeend(game);
 	exit(0);
 }
 
@@ -258,7 +261,6 @@ int on_keypress(int keycode, t_game *game)
 	{
 		head_turn(game, -0.10);
 	}
-	printf("%f || %f\n", game->pos.posx, game->pos.posy);
 	return (0);
 }
 
