@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:48:02 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/01 14:06:18 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/03 15:03:27 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,10 @@ char	*ft_strdup_size(const char *s, int size)
 	dup = malloc((sizeof(char)) * (size + 1));
 	if (!dup)
 		return (NULL);
-	while (i < ft_strlen(s) - 1)
+	while ((int)i < size)
 	{
 		dup[i] = s[i];
 		i++;
-	}
-	if (size > (int)ft_strlen(s))
-	{
-		while ((int)i < size)
-			dup[i++] = ' ';
 	}
 	dup[i] = '\0';
 	return (dup);
@@ -80,4 +75,16 @@ int	ft_atoiAlpha(const char *nptr)
 		i++;
 	}
 	return (nbr * neg);
+}
+
+int	ft_strlenback(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i] && str[i] != '\n')
+		i++;
+	return (i);
 }

@@ -6,18 +6,16 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:24:55 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/01 13:26:54 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/03 10:35:02 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int	addvaluetexture(char *line, char **map_texture)
+int	addvaluetexture(char *line, int i, char **map_texture)
 {
 	int	j;
-	int	i;
 
-	i = 3;
 	j = 0;
 	while (line[i] == ' ' && line[i])
 		i++;

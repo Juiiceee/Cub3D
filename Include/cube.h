@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/01 14:02:31 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/03 14:58:14 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ int							checkall(t_game *game);
 int							checkotherchar(t_game game);
 int							checkwall(t_game game);
 int							checkplayer(t_game *game);
+int							check_map_sides(t_game *game);
+int							check_top_or_bottom(char **map_tab, int i, int j);
 
 // mapColor.c
 int							create_rgb(int *tab);
@@ -126,7 +128,8 @@ int							gettextures(t_game *game);
 int							gettexturew(t_game *game);
 
 // mapUtils.c
-int							addvaluetexture(char *line, char **map_texture);
+int							addvaluetexture(char *line, int i,
+								char **map_texture);
 
 // init.c
 void						initall(t_game *game);
@@ -142,6 +145,7 @@ int							error(char *text);
 int							strlenno(char *str);
 char						*ft_strdup_size(const char *s, int size);
 int							ft_atoiAlpha(const char *nptr);
+int							ft_strlenback(char *str);
 
 // utilsfree.c
 void						freeend(t_game *game);

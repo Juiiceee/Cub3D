@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 15:55:59 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/01 14:11:50 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/03 15:02:21 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,16 @@ int	createarea(t_game *game, int start, int end)
 	while (i < end)
 	{
 		game->area[i] = ft_strdup_size(game->map[start + i],
-				game->map_info.area_dim.width - 1);
+				ft_strlenback(game->map[start + i]));
 		if (!game->area[i])
 			return (1);
 		i++;
 	}
 	game->area[i] = NULL;
-	changevalue(game);
+	int p = 0;
+	while (game->area[p])
+		printf("%s\n", game->area[p++]);
+	// changevalue(game);
 	return (0);
 }
 
