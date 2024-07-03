@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/07/03 13:56:05 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/03 23:52:09 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,13 @@ void raycast(t_game *game)
 
 int main_loop(t_game *game)
 {
+	if ((game->pos.posx > game->map_info.area_dim.width - 1 
+	|| game->pos.posx < 1.10) || (game->pos.posy > 
+	game->map_info.area_dim.height - 1 || game->pos.posy < 1.10))
+	{
+		mlx_clear_window(game->mlx_ptr, game->win_ptr);
+		return 1;
+	}
 	raycast(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.img, 0, 0);
 	return 0;
