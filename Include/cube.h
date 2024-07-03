@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/03 09:41:25 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/03 13:10:38 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,25 @@ typedef struct s_game_area_dimension
 	int						width;
 }							t_game_area_dimension;
 
+typedef struct s_texture
+{
+    void *img;
+    char *data;
+    int width;
+    int height;
+    int bpp;
+    int size_line;
+    int endian;
+} t_texture;
+
+typedef struct s_game_texture
+{
+	t_texture north;
+	t_texture west;
+	t_texture east;
+	t_texture south;
+} t_game_texture;
+
 typedef struct s_game_map_info
 {
 	char					*pathmap;
@@ -116,32 +135,22 @@ typedef struct s_game_ray
 	int texX;
     int texWidth;
     float wallX;
+	t_texture sprite; 
 }	t_game_ray;
-
-typedef struct s_game_texture
-{
-    void *img;
-    char *data;
-    int width;
-    int height;
-    int bpp;
-    int size_line;
-    int endian;
-} t_game_texture;
 
 
 typedef struct s_game
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
-	char					**map;
+	char			**map;
 	char			**area;
 	t_game_mesure	mesure;
 	t_game_pos		pos;
-	t_game_texture	texture;
-	t_game_texture	img;
+	t_game_texture	textures;
+	t_texture		img;
 	t_game_ray		ray;
-	t_game_map_info			map_info;
+	t_game_map_info	map_info;
 }	t_game;
 
 // mapAreaCreate.c

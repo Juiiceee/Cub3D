@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:38:15 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/03 09:42:41 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/03 09:55:03 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	getmapinfo(t_game *game)
 {
-	// if (gettexturen(game) || gettexturee(game) || gettextures(game)
-	// 	|| gettexturew(game) || getcolor_f(game) || getcolor_c(game))
-	// 	return (1);
+	if (gettexturen(game) || gettexturee(game) || gettextures(game)
+		|| gettexturew(game) || getcolor_f(game) || getcolor_c(game))
+		return (1);
 	if (recoarea(game))
 		return (1);
 	return (0);
