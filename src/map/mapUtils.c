@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 13:24:55 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 13:27:10 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/01 13:26:54 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ int	addvaluetexture(char *line, char **map_texture)
 		return (1);
 	if (*map_texture)
 		return (0);
-	return (1);
+	return (error("Probleme allocation"));
 }

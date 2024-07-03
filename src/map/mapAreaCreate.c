@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 15:55:59 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 16:03:32 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/01 14:11:50 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	recoarea(t_game *game)
 	int	end;
 
 	if (checkifarea(game, &start, &end))
-		return (1);
+		return (error("No area"));
 	getareainfo(game, start, end);
 	if (createarea(game, start, end))
-		return (1);
+		return (error("Probleme allocation"));
 	return (0);
 }
 

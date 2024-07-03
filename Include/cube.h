@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/01 01:16:17 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/03 09:41:25 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ int							gettexturew(t_game *game);
 // mapUtils.c
 int							addvaluetexture(char *line, char **map_texture);
 
-// initTexture.c
+// init.c
 void						initall(t_game *game);
 void						inittexture(t_game *game);
 void						initvalue(t_game *game);
@@ -197,6 +197,7 @@ char						*get_next_line(int fd);
 int							error(char *text);
 int							strlenno(char *str);
 char						*ft_strdup_size(const char *s, int size);
+int							ft_atoiAlpha(const char *nptr);
 
 // utilsfree.c
 void						freeend(t_game *game);

@@ -6,7 +6,7 @@
 #    By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/12 15:57:01 by lbehr             #+#    #+#              #
-#    Updated: 2024/07/01 01:07:53 by mda-cunh         ###   ########.fr        #
+#    Updated: 2024/07/03 09:41:20 by mda-cunh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME		:= cub3D
 SRC_DIR		:= src
 OBJ_DIR		:= obj
-SRCS		:= gnl/get_next_line.c map/mapCheckInput.c map/mapChecker.c map/mapColor.c map/mapCreate.c map/mapSize.c map/mapTexture.c map/mapUtils.c map/mapAreaCreate.c init/initTexture.c main.c utils/utils.c utils/utilsfree.c
+SRCS		:= gnl/get_next_line.c map/mapChecker.c map/mapUtils.c map/mapAreaCreate.c map/mapCheckInput.c map/mapColor.c map/mapCreate.c map/mapSize.c map/mapTexture.c init/init.c utils/utils.c utils/utilsfree.c main.c
 #alias mc='find ./src -name "*.c" | tr "\n" " " | sed -e "s#\\./src/##g" -e "s/ $//" | xclip -selection clipboard'
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
 OBJS		:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
