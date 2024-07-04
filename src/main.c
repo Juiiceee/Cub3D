@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/07/01 01:00:12 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/04 10:25:33 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "cube.h"
 
-int main(int argc, char **argv)
+int main(/*int argc, char **argv*/)
 {
 	t_game game;
+	char *argv[] = {"caca", "oui.cub", 0};
 
-	if (argc == 2)
-	{
+	/*if (argc == 2)
+	{*/
 		initall(&game);
 		if (checkextension(argv[1], ".cub"))
 			return (1);
@@ -27,10 +28,10 @@ int main(int argc, char **argv)
 			return (1);
 		if (checkall(&game))
 			return (1);
-		int i = 0;
-		while (game.area[i])
-			printf("%s\n", game.area[i++]);
+		int p = 0;
+		while (game.area[p])
+			printf("%s\n", game.area[p++]);
 		freeend(&game);
-	}
+	//}
 	return 0;
 }

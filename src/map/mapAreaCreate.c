@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 15:55:59 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 16:03:32 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/04 14:36:59 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@ int	recoarea(t_game *game)
 {
 	int	start;
 	int	end;
+	int	p;
 
 	if (checkifarea(game, &start, &end))
 		return (1);
 	getareainfo(game, start, end);
 	if (createarea(game, start, end))
 		return (1);
+	p = 0;
+	while (game->area[p])
+		printf("%s\n", game->area[p++]);
 	return (0);
 }
 
@@ -74,8 +78,7 @@ int	createarea(t_game *game, int start, int end)
 		return (1);
 	while (i < end)
 	{
-		game->area[i] = ft_strdup_size(game->map[start + i],
-				game->map_info.area_dim.width - 1);
+		game->area[i] = ft_strdup_size(game->map[start + i]);
 		if (!game->area[i])
 			return (1);
 		i++;
@@ -87,18 +90,22 @@ int	createarea(t_game *game, int start, int end)
 
 void	changevalue(t_game *game)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (game->area[i])
 	{
 		j = 0;
-		while (game->area[i][j])
-		{
-			if (ft_isspace(game->area[i][j]))
-				game->area[i][j] = '1';
+		while (game->area[i][j] == ' ' || game->area[i][j] == '\t'
+			|| game->area[i][j] == '\r' || game->area[i][j] == '\v'
+			|| game->area[i][j] == '\f')
 			j++;
+		while (game->area[i][++j])
+		{
+			if (game->area[i][j] == ' '
+				&& j != game->area[i][ft_strlen(game->area[i]) - 1])
+				game->area[i][j] = '1';
 		}
 		i++;
 	}

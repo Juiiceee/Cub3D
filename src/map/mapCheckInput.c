@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapCheckInput.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:40:14 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/01 00:56:38 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/04 14:37:22 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	checkall(t_game *game)
 	good = False;
 	if (checkotherchar(*game))
 		good = error("Bad Caracter");
-	// if (checkwall(*game))
-	// 	good = error("Wall error");
+	if (checkwall(*game))
+		good = error("Wall error");
 	if (checkplayer(game))
 		good = error("Player error");
 	return (good);
@@ -38,7 +38,9 @@ int	checkotherchar(t_game game)
 		while (game.area[i][j])
 		{
 			if (game.area[i][j] != '0' && game.area[i][j] != '1'
-				&& game.area[i][j] != 'N')
+				&& game.area[i][j] != 'N' && game.area[i][j] != 'S'
+				&& game.area[i][j] != 'W' && game.area[i][j] != 'E'
+				&& game.area[i][j] != ' ')
 				return (1);
 			j++;
 		}
@@ -83,7 +85,8 @@ int	checkplayer(t_game *game)
 		j = 0;
 		while (game->area[i][j])
 		{
-			if (game->area[i][j] == 'N')
+			if (game->area[i][j] == 'N' || game->area[i][j] == 'S'
+				|| game->area[i][j] == 'W' || game->area[i][j] == 'E')
 			{
 				putpos(game, (int)j, i);
 				player++;

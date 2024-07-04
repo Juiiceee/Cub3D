@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:48:02 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 14:39:27 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/04 14:12:04 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,19 @@ int	strlenno(char *str)
 	return (i);
 }
 
-char	*ft_strdup_size(const char *s, int size)
+char	*ft_strdup_size(char *s)
 {
-	size_t	i;
+	int		i;
 	char	*dup;
 
 	i = 0;
-	dup = malloc((sizeof(char)) * (size + 1));
+	dup = malloc((sizeof(char)) * (strlenno(s) + 1));
 	if (!dup)
 		return (NULL);
-	while (i < ft_strlen(s) - 1)
+	while (i < strlenno(s))
 	{
 		dup[i] = s[i];
 		i++;
-	}
-	if (size > (int)ft_strlen(s))
-	{
-		while ((int)i < size)
-			dup[i++] = ' ';
 	}
 	dup[i] = '\0';
 	return (dup);
