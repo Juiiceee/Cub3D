@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/07/03 23:52:09 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/04 13:58:30 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,7 @@ void raycast(t_game *game)
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
-		t_game_ray raycast;
+		t_game_ray raycast;		
 
 		init_raycast(game, &raycast, x);
 		calculate_step(game, &raycast);
@@ -208,22 +208,15 @@ void raycast(t_game *game)
 		calculate_perp_wall_dist(game, &raycast);
 		calculate_line_height(&raycast);
 		hit_point_texture(game, &raycast);
-		render_wall(game, &raycast, x);
 		draw_line(game, x, 0, raycast.drawStart, game->map_info.color_ceiling);
 		draw_line(game, x, raycast.drawEnd, WIN_HEIGHT, game->map_info.color_floor);
+		render_wall(game, &raycast, x);
 		x++;
 	}
 }
 
 int main_loop(t_game *game)
 {
-	if ((game->pos.posx > game->map_info.area_dim.width - 1 
-	|| game->pos.posx < 1.10) || (game->pos.posy > 
-	game->map_info.area_dim.height - 1 || game->pos.posy < 1.10))
-	{
-		mlx_clear_window(game->mlx_ptr, game->win_ptr);
-		return 1;
-	}
 	raycast(game);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.img, 0, 0);
 	return 0;
@@ -248,8 +241,53 @@ void head_turn(t_game *game, float angle)
 	float oldPlaneX = game->pos.planex;
 	game->pos.planex = game->pos.planex * cos(angle) - game->pos.planey * sin(angle);
 	game->pos.planey = oldPlaneX * sin(angle) + game->pos.planey * cos(angle);
-	// printf("diry = %f || dirx = %f\n", game->diry, game->dirx);
-	// printf("planey = %f || planex = %f\n", game->planey, game->planex);
+}
+
+int	ft_iswall(t_game *game, double x, double y)
+{
+	if (game->area[(int) y][(int) x] == '0')
+		return (0);
+	return (1);
+}
+
+void move_left(t_game *game)
+{
+	if (!ft_iswall(game, game->pos.posx - game->pos.planex * 0.20, 
+				game->pos.posy - game->pos.planey * 0.20))
+	{
+		game->pos.posx -= game->pos.planex * 0.10;
+		game->pos.posy -= game->pos.planey * 0.10;
+	}
+}
+
+void move_right(t_game *game)
+{
+	if (!ft_iswall(game, game->pos.posx + game->pos.planex * 0.20, 
+			game->pos.posy + game->pos.planey * 0.20))
+	{
+		game->pos.posx += game->pos.planex * 0.10;
+		game->pos.posy += game->pos.planey * 0.10;
+	}
+}
+
+void move_forward(t_game *game)
+{
+	if (!ft_iswall(game, game->pos.posx + game->pos.dirx * 0.20,
+		game->pos.posy + game->pos.diry * 0.20))
+	{
+		game->pos.posx += game->pos.dirx * 0.10;
+		game->pos.posy += game->pos.diry * 0.10;
+	}
+}
+
+void move_back(t_game *game)
+{
+	if (!ft_iswall(game, game->pos.posx - game->pos.dirx * 0.20,
+		game->pos.posy - game->pos.diry * 0.20))
+	{
+	game->pos.posx -= game->pos.dirx * 0.10;
+	game->pos.posy -= game->pos.diry * 0.10;
+	}
 }
 
 int on_keypress(int keycode, t_game *game)
@@ -257,33 +295,17 @@ int on_keypress(int keycode, t_game *game)
 	if (keycode == XK_Escape)
 		on_destroy(game);
 	else if (keycode == XK_a)
-	{
-		game->pos.posx -= game->pos.planex * 0.10;
-		game->pos.posy -= game->pos.planey * 0.10;
-	}
+		move_left(game);
 	else if (keycode == XK_d)
-	{
-		game->pos.posx += game->pos.planex * 0.10;
-		game->pos.posy += game->pos.planey * 0.10;
-	}
+		move_right(game);
 	else if (keycode == XK_s || keycode == XK_Down)
-	{
-		game->pos.posx -= game->pos.dirx * 0.10;
-		game->pos.posy -= game->pos.diry * 0.10;
-	}
+		move_back(game);
 	else if (keycode == XK_w || keycode == XK_Up)
-	{
-		game->pos.posx += game->pos.dirx * 0.10;
-		game->pos.posy += game->pos.diry * 0.10;
-	}
+		move_forward(game);
 	else if (keycode == XK_Left)
-	{
 		head_turn(game, 0.10);
-	}
 	else if (keycode == XK_Right)
-	{
 		head_turn(game, -0.10);
-	}
 	return (0);
 }
 
