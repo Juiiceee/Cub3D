@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/07/04 10:25:33 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/04 17:50:39 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main(/*int argc, char **argv*/)
 
 	/*if (argc == 2)
 	{*/
-		initall(&game);
+		ft_bzero(&game, sizeof(t_game));
 		if (checkextension(argv[1], ".cub"))
 			return (1);
 		if (calculatemapsize(argv[1], &game))

@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:40:14 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/04 14:37:22 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/05 17:17:06 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,13 @@
 
 int	checkall(t_game *game)
 {
-	t_bool	good;
-
-	good = False;
 	if (checkotherchar(*game))
-		good = error("Bad Caracter");
+		return(error("Bad Caracter"));
 	if (checkwall(*game))
-		good = error("Wall error");
+		return(error("Wall error"));
 	if (checkplayer(game))
-		good = error("Player error");
-	return (good);
+		return(error("Player error"));
+	return (0);
 }
 
 int	checkotherchar(t_game game)
@@ -54,16 +51,41 @@ int	checkwall(t_game game)
 	int	i;
 	int	j;
 
+	if (checkwallside(game))
+		return (1);
 	i = 0;
 	while (game.area[i])
 	{
 		j = 0;
 		while (game.area[i][j])
 		{
-			if (game.area[0][j] != '1'
-				|| game.area[game.map_info.area_dim.height - 1][j] != '1'
-				|| game.area[i][0] != '1'
-				|| game.area[i][game.map_info.area_dim.width - 2] != '1')
+			if (game.area[i][j] == '0')
+				if (checkfour(game.area, i, j))
+					return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	checkwallside(t_game game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (game.area[i])
+	{
+		j = 0;
+		while (game.area[i][j])
+		{
+			if ((i == 0 && game.area[i][j] == '0') || (j == 0
+					&& game.area[i][j] == '0')
+				|| (j == game.map_info.area_dim.width - 1
+					&& game.area[i][j] == '0')
+				|| (i == game.map_info.area_dim.height - 1
+					&& game.area[i][j] == '0'))
 				return (1);
 			j++;
 		}

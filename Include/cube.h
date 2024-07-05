@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/04 14:12:32 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/05 17:20:24 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ typedef struct s_game
 int							recoarea(t_game *game);
 int							checkifarea(t_game *game, int *start, int *end);
 int							createarea(t_game *game, int start, int end);
-void						changevalue(t_game *game);
 void						getareainfo(t_game *game, int start, int end);
 
 // mapChecker.c
@@ -103,6 +102,7 @@ int							checkall(t_game *game);
 int							checkotherchar(t_game game);
 int							checkwall(t_game game);
 int							checkplayer(t_game *game);
+int							checkwallside(t_game game);
 
 // mapColor.c
 int							create_rgb(int *tab);
@@ -128,11 +128,6 @@ int							gettexturew(t_game *game);
 // mapUtils.c
 int							addvaluetexture(char *line, char **map_texture);
 
-// initTexture.c
-void						initall(t_game *game);
-void						inittexture(t_game *game);
-void						initvalue(t_game *game);
-
 // get_next_line.c
 
 char						*get_next_line(int fd);
@@ -140,7 +135,9 @@ char						*get_next_line(int fd);
 // utils.c
 int							error(char *text);
 int							strlenno(char *str);
-char						*ft_strdup_size(char *s);
+char						*ft_strdup_size(char *s, int size);
+int							isnotcorrect(char c);
+int							checkfour(char **map, int cols, int rows);
 
 // utilsfree.c
 void						freeend(t_game *game);

@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:48:02 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/04 14:12:04 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/05 17:19:31 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ int	strlenno(char *str)
 	return (i);
 }
 
-char	*ft_strdup_size(char *s)
+char	*ft_strdup_size(char *s, int size)
 {
 	int		i;
 	char	*dup;
 
 	i = 0;
-	dup = malloc((sizeof(char)) * (strlenno(s) + 1));
+	dup = malloc((sizeof(char)) * (size + 1));
 	if (!dup)
 		return (NULL);
 	while (i < strlenno(s))
@@ -48,4 +48,18 @@ char	*ft_strdup_size(char *s)
 	}
 	dup[i] = '\0';
 	return (dup);
+}
+
+int	isnotcorrect(char c)
+{
+	return (c != '0' && c != '1' && c != 'N' && c != 'E' && c != 'S' && c != 'W');
+}
+
+int	checkfour(char **map, int cols, int rows)
+{
+	if ((isnotcorrect(map[cols - 1][rows])) || (isnotcorrect(map[cols][rows
+				- 1])) || (isnotcorrect(map[cols + 1][rows]))
+		|| (isnotcorrect(map[cols][rows + 1])))
+		return (1);
+	return (0);
 }
