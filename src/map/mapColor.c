@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapColor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:10:56 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/01 00:35:10 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/05 17:25:58 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	getcolor_c(t_game *game)
 int	getcolor_f(t_game *game)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < game->map_info.heightmap)
 	{
@@ -81,7 +81,7 @@ int	*setcolortab(char **color)
 		i++;
 	if (i != 3)
 		return (0);
-	tab = ft_calloc(3,sizeof(int));
+	tab = ft_calloc(3, sizeof(int));
 	if (!tab)
 		return (0);
 	tab[0] = ft_atoi(color[0]);

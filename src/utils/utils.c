@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:48:02 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/05 17:19:31 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/05 17:27:30 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ char	*ft_strdup_size(char *s, int size)
 
 int	isnotcorrect(char c)
 {
-	return (c != '0' && c != '1' && c != 'N' && c != 'E' && c != 'S' && c != 'W');
+	return (c != '0' && c != '1' && c != 'N' && c != 'E' && c != 'S'
+		&& c != 'W');
 }
 
 int	checkfour(char **map, int cols, int rows)

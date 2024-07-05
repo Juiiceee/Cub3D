@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/05 17:20:24 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/05 17:22:47 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@
 
 # define WIN_WIDTH 640
 # define WIN_HEIGHT 480
-# define MAP_WIDTH 10
-# define MAP_HEIGHT 10
 # define WHITE 0xFFFFFF
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
@@ -36,7 +34,7 @@ typedef enum e_return
 {
 	SUCCESS,
 	FAILURE
-} t_return ;
+}	t_return;
 
 typedef enum e_bool
 {
@@ -129,7 +127,6 @@ int							gettexturew(t_game *game);
 int							addvaluetexture(char *line, char **map_texture);
 
 // get_next_line.c
-
 char						*get_next_line(int fd);
 
 // utils.c

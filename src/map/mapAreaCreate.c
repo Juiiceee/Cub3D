@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 15:55:59 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/05 17:20:28 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/05 17:24:15 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	checkifarea(t_game *game, int *start, int *end)
 		{
 			j = 0;
 			while (game->map[*start] && ft_strlen(game->map[*start
-					+ *end]) != 0)
+						+ *end]) != 0)
 				(*end)++;
 			return (0);
 		}

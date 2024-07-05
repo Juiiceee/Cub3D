@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:40:14 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/05 17:17:06 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/05 17:25:14 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int	checkall(t_game *game)
 {
 	if (checkotherchar(*game))
-		return(error("Bad Caracter"));
+		return (error("Bad Caracter"));
 	if (checkwall(*game))
-		return(error("Wall error"));
+		return (error("Wall error"));
 	if (checkplayer(game))
-		return(error("Player error"));
+		return (error("Player error"));
 	return (0);
 }
 

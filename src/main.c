@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/07/04 17:50:39 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/05 17:28:20 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int main(/*int argc, char **argv*/)
 {
-	t_game game;
+	t_game	game;
 	char *argv[] = {"caca", "oui.cub", 0};
 
-	/*if (argc == 2)
-	{*/
+	if (/*argc == 2*/1)
+	{
 		ft_bzero(&game, sizeof(t_game));
 		if (checkextension(argv[1], ".cub"))
 			return (1);
@@ -32,6 +32,6 @@ int main(/*int argc, char **argv*/)
 		while (game.area[p])
 			printf("%s\n", game.area[p++]);
 		freeend(&game);
-	//}
+	}
 	return 0;
 }
