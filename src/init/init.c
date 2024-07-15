@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 12:09:54 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/15 13:15:51 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/15 17:38:11 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,15 @@ void	initall(t_game *game)
 		game->key[i] = 0;
 		i++;	
 	}
+}
+
+void set_fov(t_game *game, double fov_degrees)
+{
+	double fov_radians = (fov_degrees)*M_PI / 180.0;
+	double half_fov_tan = tan(fov_radians / 2.0);
+
+	game->pos.planex = game->pos.diry * half_fov_tan;
+	game->pos.planey = -game->pos.dirx * half_fov_tan;
 }
 
 void	inittexture(t_game *game)

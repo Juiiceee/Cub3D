@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/15 13:11:53 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/15 17:48:23 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,7 @@ int							addvaluetexture(char *line, char **map_texture);
 void						initall(t_game *game);
 void						inittexture(t_game *game);
 void						initvalue(t_game *game);
+void 						set_fov(t_game *game, double fov_degrees);
 
 // get_next_line.c
 
@@ -227,5 +228,42 @@ void						freeend(t_game *game);
 int							freeandreturn(char *str);
 void						freetab(char **str);
 void						freeifnotnull(t_game_map_texture *texture);
+
+// hitbox.c
+double						hitbox_x(double pos_x, double move_x, double pos_y, char **map);
+double						hitbox_y(double pos_y, double move_y, double pos_x,	char **map);
+
+// key_exec.c
+void						head_turn(t_game *game, float angle);
+void 						move_left(t_game *game);
+void 						move_right(t_game *game);
+void 						move_forward(t_game *game);
+void 						move_back(t_game *game);
+
+// key_handle.c
+int							on_destroy(t_game *game);
+int							key_action(t_game *game);
+int							on_keypress(int keycode, t_game *game);
+int 						on_keyrelease(int keycode, t_game *game);
+
+// raycast_utils.c
+void 						draw_line(t_game *game, int x, int drawStart, int drawEnd, int color);
+void 						calculate_perp_wall_dist(t_game *game, t_game_ray *rc);
+void 						calculate_line_height(t_game_ray *rc);
+void 						hit_point_texture(t_game *game, t_game_ray *rc);
+void 						init_raycast(t_game *game, t_game_ray *rc, int x);
+
+// raycast.c
+void 						render_wall(t_game *game, t_game_ray *rc, int x);
+void 						chosen_side(t_game *game, t_game_ray *rc);
+void 						dda(t_game *game, t_game_ray *rc);
+void 						calculate_step(t_game *game, t_game_ray *rc);
+void 						raycast(t_game *game);
+
+// textures.c
+void 						img_pix_put(t_texture *img, int x, int y, int color);
+void 						load_wall(t_game *game);
+
+
 
 #endif
