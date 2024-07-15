@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 17:33:34 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/07/15 18:08:48 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/15 20:38:42 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 int	on_destroy(t_game *game)
 {
 	mlx_destroy_image(game->mlx_ptr, game->img.img);
+	mlx_destroy_image(game->mlx_ptr, game->textures.north.img);
+	mlx_destroy_image(game->mlx_ptr, game->textures.east.img);
+	mlx_destroy_image(game->mlx_ptr, game->textures.west.img);
+	mlx_destroy_image(game->mlx_ptr, game->textures.south.img);
 	mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 	mlx_destroy_display(game->mlx_ptr);
 	free(game->mlx_ptr);

@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:32:50 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/03 13:44:47 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/15 20:34:25 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,33 @@ int	createmap(t_game *game)
 	return (close(fd), 0);
 }
 
+void	putfacing(t_game *game, char dir)
+{
+	if (dir == 'N')
+	{
+		game->pos.dirx = 0;
+		game->pos.diry = -1;
+	}
+	if (dir == 'S')
+	{
+		game->pos.dirx = 0;
+		game->pos.diry = 1;
+	}
+	if (dir == 'W')
+	{
+		game->pos.dirx = -1;
+		game->pos.diry = 0;
+	}
+	if (dir == 'E')
+	{
+		game->pos.dirx = 1;
+		game->pos.diry = 0;
+	}
+}
+
 void	putpos(t_game *game, int x, int y)
 {
+	putfacing(game, game->area[y][x]);
 	game->area[y][x] = '0';
 	game->pos.posx = x + 0.5;
 	game->pos.posy = y + 0.5;

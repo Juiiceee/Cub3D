@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 15:55:59 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/15 19:24:36 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/15 20:41:05 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	getareainfo(t_game *game, int start, int end)
 
 	i = 0;
 	game->map_info.area_dim.height = end;
+	game->map_info.area_dim.width = ft_strlen(game->map[start + i]) - 1;
 	while (i < end)
 	{
 		if ((int)ft_strlen(game->map[start + i])

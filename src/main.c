@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/07/15 19:29:52 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/15 20:36:58 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ void	set_fov(t_game *game, double fov_degrees)
 
 int	start_parse(t_game *game, char **argv)
 {
+	int	i;
+
+	i = 0;
 	if (checkextension(argv[1], ".cub"))
 		return (1);
 	if (calculatemapsize(argv[1], game))
@@ -34,6 +37,8 @@ int	start_parse(t_game *game, char **argv)
 			, free(game->map_info.pathmap), 1);
 	if (checkall(game))
 		return (freeend(game), 1);
+	while (i < 9)
+		game->key[i++] = 0;
 	return (0);
 }
 
@@ -55,10 +60,8 @@ int	main(int argc, char **argv)
 		return (freeend(&game), 1);
 	game.mlx_ptr = mlx_init();
 	game.win_ptr = mlx_new_window(game.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
-	game.pos.dirx = 0;
-	game.pos.diry = 1;
-	set_fov(&game, 70);
 	load_wall(&game);
+	set_fov(&game, 70);
 	game.img.img = mlx_new_image(game.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	game.img.data = mlx_get_data_addr(game.img.img, &game.img.bpp,
 			&game.img.size_line, &game.img.endian);
