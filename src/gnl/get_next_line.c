@@ -6,13 +6,13 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 13:42:05 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/11 14:00:25 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/05 17:23:58 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-char	*removeLine(char *buffer)
+char	*removeline(char *buffer)
 {
 	int		i;
 	int		j;
@@ -106,6 +106,6 @@ char	*get_next_line(int fd)
 	if (!buffer)
 		return (NULL);
 	line = reccup(buffer);
-	buffer = removeLine(buffer);
+	buffer = removeline(buffer);
 	return (line);
 }

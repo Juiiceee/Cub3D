@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapAreaCreate.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 15:55:59 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/01 14:11:50 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/15 19:24:36 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	checkifarea(t_game *game, int *start, int *end)
 		{
 			j = 0;
 			while (game->map[*start] && ft_strlen(game->map[*start
-					+ *end]) != 0)
+						+ *end]) != 0)
 				(*end)++;
 			return (0);
 		}
@@ -57,9 +57,9 @@ void	getareainfo(t_game *game, int start, int end)
 	game->map_info.area_dim.height = end;
 	while (i < end)
 	{
-		if ((int)ft_strlen(game->map[start
-				+ i]) > game->map_info.area_dim.width)
-			game->map_info.area_dim.width = ft_strlen(game->map[start + i]);
+		if ((int)ft_strlen(game->map[start + i])
+			- 1 > game->map_info.area_dim.width)
+			game->map_info.area_dim.width = ft_strlen(game->map[start + i]) - 1;
 		i++;
 	}
 }
@@ -75,31 +75,11 @@ int	createarea(t_game *game, int start, int end)
 	while (i < end)
 	{
 		game->area[i] = ft_strdup_size(game->map[start + i],
-				game->map_info.area_dim.width - 1);
+				game->map_info.area_dim.width);
 		if (!game->area[i])
 			return (1);
 		i++;
 	}
 	game->area[i] = NULL;
-	changevalue(game);
 	return (0);
-}
-
-void	changevalue(t_game *game)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (game->area[i])
-	{
-		j = 0;
-		while (game->area[i][j])
-		{
-			if (ft_isspace(game->area[i][j]))
-				game->area[i][j] = '1';
-			j++;
-		}
-		i++;
-	}
 }

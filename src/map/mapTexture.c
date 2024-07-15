@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:38:15 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/03 09:55:03 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/15 19:25:21 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	gettexturen(t_game *game)
 int	gettexturee(t_game *game)
 {
 	int	i;
+
 	i = 0;
 	while (i < game->map_info.heightmap)
 	{
@@ -54,6 +55,7 @@ int	gettexturee(t_game *game)
 int	gettextures(t_game *game)
 {
 	int	i;
+
 	i = 0;
 	while (i < game->map_info.heightmap)
 	{

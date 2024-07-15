@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:48:02 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/15 18:54:52 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/15 19:25:38 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,52 +32,35 @@ int	strlenno(char *str)
 	return (i);
 }
 
-char	*ft_strdup_size(const char *s, int size)
+char	*ft_strdup_size(char *s, int size)
 {
-	size_t	i;
+	int		i;
 	char	*dup;
 
 	i = 0;
 	dup = malloc((sizeof(char)) * (size + 1));
 	if (!dup)
 		return (NULL);
-	while (i < ft_strlen(s) - 1)
+	while (i < strlenno(s))
 	{
 		dup[i] = s[i];
 		i++;
-	}
-	if (size > (int)ft_strlen(s))
-	{
-		while ((int)i < size)
-			dup[i++] = ' ';
 	}
 	dup[i] = '\0';
 	return (dup);
 }
 
-int	ft_atoiAlpha(const char *nptr)
+int	isnotcorrect(char c)
 {
-	long	nbr;
-	long	neg;
-	int		i;
+	return (c != '0' && c != '1' && c != 'N' && c != 'E' && c != 'S'
+		&& c != 'W');
+}
 
-	nbr = 0;
-	neg = 1;
-	i = 0;
-	while ((nptr[i] <= 13 && nptr[i] >= 9) || nptr[i] == 32)
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
-			neg *= -1;
-		i++;
-	}
-	else if (ft_isalpha(nptr[i]))
-		return (-1);
-	while ((nptr[i] >= '0') && (nptr[i] <= '9'))
-	{
-		nbr = nbr * 10 + nptr[i] - 48;
-		i++;
-	}
-	return (nbr * neg);
+int	checkfour(char **map, int cols, int rows)
+{
+	if ((isnotcorrect(map[cols - 1][rows])) || (isnotcorrect(map[cols][rows
+				- 1])) || (isnotcorrect(map[cols + 1][rows]))
+		|| (isnotcorrect(map[cols][rows + 1])))
+		return (1);
+	return (0);
 }

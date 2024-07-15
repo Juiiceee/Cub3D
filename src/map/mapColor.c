@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:10:56 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/03 09:41:56 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/15 19:25:08 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	getcolor_c(t_game *game)
 int	getcolor_f(t_game *game)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < game->map_info.heightmap)
 	{
@@ -81,7 +81,7 @@ int	*setcolortab(char **color)
 	while (color[i])
 		i++;
 	if (i != 3)
-		return ((void)error("Mauvaise separation"), NULL);
+		return (0);
 	tab = ft_calloc(3, sizeof(int));
 	if (!tab)
 		return ((void)error("Probleme allocation"), NULL);

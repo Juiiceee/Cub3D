@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/15 19:15:43 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/15 19:23:06 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# define WIN_WIDTH 1280
-# define WIN_HEIGHT 960
-# define MAP_WIDTH 10
-# define MAP_HEIGHT 10
+# define WIN_WIDTH 640
+# define WIN_HEIGHT 480
 # define WHITE 0xFFFFFF
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
@@ -166,20 +164,20 @@ typedef struct s_game
 }	t_game;
 
 // mapAreaCreate.c
-int		recoarea(t_game *game);
-int		checkifarea(t_game *game, int *start, int *end);
-int		createarea(t_game *game, int start, int end);
-void	changevalue(t_game *game);
-void	getareainfo(t_game *game, int start, int end);
+int							recoarea(t_game *game);
+int							checkifarea(t_game *game, int *start, int *end);
+int							createarea(t_game *game, int start, int end);
+void						getareainfo(t_game *game, int start, int end);
 
 // mapChecker.c
 int		checkextension(char *str, char *extension);
 
 // mapCheckerInput.c
-int		checkall(t_game *game);
-int		checkotherchar(t_game game);
-int		checkwall(t_game game);
-int		checkplayer(t_game *game);
+int							checkall(t_game *game);
+int							checkotherchar(t_game game);
+int							checkwall(t_game game);
+int							checkplayer(t_game *game);
+int							checkwallside(t_game game);
 
 // mapColor.c
 int		create_rgb(int *tab);
@@ -210,16 +208,18 @@ void	initall(t_game *game);
 void	inittexture(t_game *game);
 void	initvalue(t_game *game);
 void	set_fov(t_game *game, double fov_degrees);
+int							addvaluetexture(char *line, char **map_texture);
 
 // get_next_line.c
 
 char	*get_next_line(int fd);
 
 // utils.c
-int		error(char *text);
-int		strlenno(char *str);
-char	*ft_strdup_size(const char *s, int size);
-int		ft_atoiAlpha(const char *nptr);
+int							error(char *text);
+int							strlenno(char *str);
+char						*ft_strdup_size(char *s, int size);
+int							isnotcorrect(char c);
+int							checkfour(char **map, int cols, int rows);
 
 // utilsfree.c
 void	freeend(t_game *game);
