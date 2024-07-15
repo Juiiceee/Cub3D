@@ -6,10 +6,9 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/15 17:48:23 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/15 18:54:06 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef CUBE_H
 # define CUBE_H
@@ -24,8 +23,8 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# define WIN_WIDTH 960
-# define WIN_HEIGHT 560
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 960
 # define MAP_WIDTH 10
 # define MAP_HEIGHT 10
 # define WHITE 0xFFFFFF
@@ -37,7 +36,7 @@ typedef enum e_return
 {
 	SUCCESS,
 	FAILURE
-} t_return ;
+}	t_return;
 
 typedef enum e_bool
 {
@@ -102,22 +101,22 @@ typedef struct s_game_area_dimension
 
 typedef struct s_texture
 {
-    void *img;
-    char *data;
-    int width;
-    int height;
-    int bpp;
-    int size_line;
-    int endian;
-} t_texture;
+	void					*img;
+	char					*data;
+	int						width;
+	int						height;
+	int						bpp;
+	int						size_line;
+	int						endian;
+}	t_texture;
 
 typedef struct s_game_texture
 {
-	t_texture north;
-	t_texture west;
-	t_texture east;
-	t_texture south;
-} t_game_texture;
+	t_texture				north;
+	t_texture				west;
+	t_texture				east;
+	t_texture				south;
+}	t_game_texture;
 
 typedef struct s_game_map_info
 {
@@ -131,26 +130,25 @@ typedef struct s_game_map_info
 
 typedef struct s_game_ray
 {
-	double		cameraX;
-	t_coord		rayDir;
-	t_coord		sideDist;
-	t_coord		deltaDist;
+	double		camera_x;
+	t_coord		ray_dir;
+	t_coord		side_dis;
+	t_coord		delta_dis;
 	t_coord_int	map;
-	t_coord_int step;
-	double		perpWallDist;
-	int			lineHeight;
-	int			drawStart;
-	int 		drawEnd;
+	t_coord_int	step;
+	double		per_wall_dis;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
 	t_coord_int	start_point;
 	t_coord_int	end_point;
-    int			hit;
+	int			hit;
 	int			side;
-	int texX;
-    int texWidth;
-    float wallX;
-	t_texture sprite; 
+	int			tex_x;
+	int			tex_width;
+	float		wall_x;
+	t_texture	sprite;
 }	t_game_ray;
-
 
 typedef struct s_game
 {
@@ -168,102 +166,101 @@ typedef struct s_game
 }	t_game;
 
 // mapAreaCreate.c
-int							recoarea(t_game *game);
-int							checkifarea(t_game *game, int *start, int *end);
-int							createarea(t_game *game, int start, int end);
-void						changevalue(t_game *game);
-void						getareainfo(t_game *game, int start, int end);
+int		recoarea(t_game *game);
+int		checkifarea(t_game *game, int *start, int *end);
+int		createarea(t_game *game, int start, int end);
+void	changevalue(t_game *game);
+void	getareainfo(t_game *game, int start, int end);
 
 // mapChecker.c
-int							checkextension(char *str, char *extension);
+int		checkextension(char *str, char *extension);
 
 // mapCheckerInput.c
-int							checkall(t_game *game);
-int							checkotherchar(t_game game);
-int							checkwall(t_game game);
-int							checkplayer(t_game *game);
+int		checkall(t_game *game);
+int		checkotherchar(t_game game);
+int		checkwall(t_game game);
+int		checkplayer(t_game *game);
 
 // mapColor.c
-int							create_rgb(int *tab);
-int							getcolor_c(t_game *game);
-int							getcolor_f(t_game *game);
-int							addvaluecolor(char *line, int *color);
-int							*setcolortab(char **color);
+int		create_rgb(int *tab);
+int		getcolor_c(t_game *game);
+int		getcolor_f(t_game *game);
+int		addvaluecolor(char *line, int *color);
+int		*setcolortab(char **color);
 
 // mapCreate.c
-int							createmap(t_game *game);
-void						putpos(t_game *game, int x, int y);
+int		createmap(t_game *game);
+void	putpos(t_game *game, int x, int y);
 
 // mapSize.c
-int							calculatemapsize(char *pathmap, t_game *game);
+int		calculatemapsize(char *pathmap, t_game *game);
 
 // mapTexture.c
-int							getmapinfo(t_game *game);
-int							gettexturen(t_game *game);
-int							gettexturee(t_game *game);
-int							gettextures(t_game *game);
-int							gettexturew(t_game *game);
+int		getmapinfo(t_game *game);
+int		gettexturen(t_game *game);
+int		gettexturee(t_game *game);
+int		gettextures(t_game *game);
+int		gettexturew(t_game *game);
 
 // mapUtils.c
-int							addvaluetexture(char *line, char **map_texture);
+int		addvaluetexture(char *line, char **map_texture);
 
 // init.c
-void						initall(t_game *game);
-void						inittexture(t_game *game);
-void						initvalue(t_game *game);
-void 						set_fov(t_game *game, double fov_degrees);
+void	initall(t_game *game);
+void	inittexture(t_game *game);
+void	initvalue(t_game *game);
+void	set_fov(t_game *game, double fov_degrees);
 
 // get_next_line.c
 
-char						*get_next_line(int fd);
+char	*get_next_line(int fd);
 
 // utils.c
-int							error(char *text);
-int							strlenno(char *str);
-char						*ft_strdup_size(const char *s, int size);
-int							ft_atoiAlpha(const char *nptr);
+int		error(char *text);
+int		strlenno(char *str);
+char	*ft_strdup_size(const char *s, int size);
+int		ft_atoiAlpha(const char *nptr);
 
 // utilsfree.c
-void						freeend(t_game *game);
-int							freeandreturn(char *str);
-void						freetab(char **str);
-void						freeifnotnull(t_game_map_texture *texture);
+void	freeend(t_game *game);
+int		freeandreturn(char *str);
+void	freetab(char **str);
+void	freeifnotnull(t_game_map_texture *texture);
 
 // hitbox.c
-double						hitbox_x(double pos_x, double move_x, double pos_y, char **map);
-double						hitbox_y(double pos_y, double move_y, double pos_x,	char **map);
+double	hitbox_x(double pos_x, double move_x, double pos_y, char **map);
+double	hitbox_y(double pos_y, double move_y, double pos_x,	char **map);
 
 // key_exec.c
-void						head_turn(t_game *game, float angle);
-void 						move_left(t_game *game);
-void 						move_right(t_game *game);
-void 						move_forward(t_game *game);
-void 						move_back(t_game *game);
+void	head_turn(t_game *game, float angle);
+void	move_left(t_game *game);
+void	move_right(t_game *game);
+void	move_forward(t_game *game);
+void	move_back(t_game *game);
 
 // key_handle.c
-int							on_destroy(t_game *game);
-int							key_action(t_game *game);
-int							on_keypress(int keycode, t_game *game);
-int 						on_keyrelease(int keycode, t_game *game);
+int		on_destroy(t_game *game);
+int		key_action(t_game *game);
+int		on_keypress(int keycode, t_game *game);
+int		on_keyrelease(int keycode, t_game *game);
 
 // raycast_utils.c
-void 						draw_line(t_game *game, int x, int drawStart, int drawEnd, int color);
-void 						calculate_perp_wall_dist(t_game *game, t_game_ray *rc);
-void 						calculate_line_height(t_game_ray *rc);
-void 						hit_point_texture(t_game *game, t_game_ray *rc);
-void 						init_raycast(t_game *game, t_game_ray *rc, int x);
+void	calculate_perp_wall_dist(t_game *game, t_game_ray *rc);
+void	calculate_line_height(t_game_ray *rc);
+void	hit_point_texture(t_game *game, t_game_ray *rc);
+void	init_raycast(t_game *game, t_game_ray *rc, int x);
 
 // raycast.c
-void 						render_wall(t_game *game, t_game_ray *rc, int x);
-void 						chosen_side(t_game *game, t_game_ray *rc);
-void 						dda(t_game *game, t_game_ray *rc);
-void 						calculate_step(t_game *game, t_game_ray *rc);
-void 						raycast(t_game *game);
+void	render_wall(t_game *game, t_game_ray *rc, int x);
+void	chosen_side(t_game *game, t_game_ray *rc);
+void	dda(t_game *game, t_game_ray *rc);
+void	calculate_step(t_game *game, t_game_ray *rc);
+void	raycast(t_game *game);
 
 // textures.c
-void 						img_pix_put(t_texture *img, int x, int y, int color);
-void 						load_wall(t_game *game);
-
-
+void	draw_ceiling(t_game *game, int x, int draw_start, int draw_end);
+void	draw_floor(t_game *game, int x, int draw_start, int draw_end);
+void	img_pix_put(t_texture *img, int x, int y, int color);
+void	load_wall(t_game *game);
 
 #endif

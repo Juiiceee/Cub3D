@@ -6,13 +6,13 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 17:33:34 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/07/15 17:35:39 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/15 18:08:48 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
-int on_destroy(t_game *game)
+int	on_destroy(t_game *game)
 {
 	mlx_destroy_image(game->mlx_ptr, game->img.img);
 	mlx_destroy_window(game->mlx_ptr, game->win_ptr);
@@ -22,7 +22,7 @@ int on_destroy(t_game *game)
 	exit(0);
 }
 
-int key_action(t_game *game)
+int	key_action(t_game *game)
 {
 	if (game->key[ESCAPE])
 		on_destroy(game);
@@ -41,7 +41,7 @@ int key_action(t_game *game)
 	return (0);
 }
 
-int on_keypress(int keycode, t_game *game)
+int	on_keypress(int keycode, t_game *game)
 {
 	if (keycode == XK_Escape)
 		game->key[ESCAPE] = 1;
@@ -60,7 +60,7 @@ int on_keypress(int keycode, t_game *game)
 	return (0);
 }
 
-int on_keyrelease(int keycode, t_game *game)
+int	on_keyrelease(int keycode, t_game *game)
 {
 	if (keycode == XK_Escape)
 		game->key[ESCAPE] = 0;
