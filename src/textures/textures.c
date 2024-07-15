@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 17:30:26 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/07/15 18:49:30 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/15 19:14:30 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	draw_ceiling(t_game *game, int x, int draw_start, int draw_end)
 {
 	int	y;
 
-	y = 0;
+	y = draw_start;
 	while (y < draw_end)
 	{
 		img_pix_put(&game->img, x, y, game->map_info.color_ceiling);
@@ -28,7 +28,7 @@ void	draw_floor(t_game *game, int x, int draw_start, int draw_end)
 {
 	int	y;
 
-	y = 0;
+	y = draw_start;
 	while (y < draw_end)
 	{
 		img_pix_put(&game->img, x, y, game->map_info.color_floor);

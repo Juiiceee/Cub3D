@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/15 18:54:06 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/15 19:15:43 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,5 +262,11 @@ void	draw_ceiling(t_game *game, int x, int draw_start, int draw_end);
 void	draw_floor(t_game *game, int x, int draw_start, int draw_end);
 void	img_pix_put(t_texture *img, int x, int y, int color);
 void	load_wall(t_game *game);
+
+// load_wall.c
+void	load_north_wall(t_game *game);
+void	load_south_wall(t_game *game);
+void	load_east_wall(t_game *game);
+void	load_west_wall(t_game *game);
 
 #endif

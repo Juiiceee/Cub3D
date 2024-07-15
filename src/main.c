@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/07/15 18:42:15 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/15 19:13:51 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int	start_parse(t_game *game, char **argv)
 	initall(game);
 	if (checkextension(argv[1], ".cub"))
 		return (1);
-	if (calculatemapsize(argv[1], &game))
+	if (calculatemapsize(argv[1], game))
 		return (1);
-	if (getmapinfo(&game))
+	if (getmapinfo(game))
 		return (freetab(game->map), freeifnotnull(&game->map_info.map_texture)
 			, free(game->map_info.pathmap), 1);
-	if (checkall(&game))
-		return (freeend(&game), 1);
+	if (checkall(game))
+		return (freeend(game), 1);
 	return (0);
 }
 
@@ -41,7 +41,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (1);
-	if (start_parse != 0)
+	if (start_parse(&game, argv) == 1)
 		return (freeend(&game), 1);
 	game.mlx_ptr = mlx_init();
 	game.win_ptr = mlx_new_window(game.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
