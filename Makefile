@@ -6,7 +6,7 @@
 #    By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/12 15:57:01 by lbehr             #+#    #+#              #
-#    Updated: 2024/07/15 19:19:41 by mda-cunh         ###   ########.fr        #
+#    Updated: 2024/07/15 19:27:42 by mda-cunh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME		:= cub3D
 SRC_DIR		:= src
 OBJ_DIR		:= obj
-SRCS		:= main.c map/mapColor.c map/mapAreaCreate.c map/mapTexture.c map/mapChecker.c map/mapCreate.c map/mapCheckInput.c map/mapSize.c map/mapUtils.c raycast/raycast_utils.c raycast/raycast.c gnl/get_next_line.c utils/utils.c utils/utilsfree.c init/init.c textures/textures.c textures/load_wall.c controls/key_handle.c controls/hitbox.c controls/key_exec.c
+SRCS		:= main.c map/mapColor.c map/mapAreaCreate.c map/mapTexture.c map/mapChecker.c map/mapCreate.c map/mapCheckInput.c map/mapSize.c map/mapUtils.c raycast/raycast_utils.c raycast/raycast.c gnl/get_next_line.c utils/utils.c utils/utilsfree.c textures/textures.c textures/load_wall.c controls/key_handle.c controls/hitbox.c controls/key_exec.c
 #alias mc='find ./src -name "*.c" | tr "\n" " " | sed -e "s#\\./src/##g" -e "s/ $//" | xclip -selection clipboard'
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
 OBJS		:= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

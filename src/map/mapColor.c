@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:10:56 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/15 19:25:08 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/15 19:27:06 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,9 @@ int	*setcolortab(char **color)
 		return (0);
 	tab = ft_calloc(3, sizeof(int));
 	if (!tab)
-		return ((void)error("Probleme allocation"), NULL);
-	tab[0] = ft_atoiAlpha(color[0]);
-	if (tab[0] == -1)
-		return ((void)error("Mauvais saisie"), free(tab), NULL);
-	tab[1] = ft_atoiAlpha(color[1]);
-	if (tab[1] == -1)
-		return ((void)error("Mauvais saisie"), free(tab), NULL);
-	tab[2] = ft_atoiAlpha(color[2]);
-	if (tab[2] == -1)
-		return ((void)error("Mauvais saisie"), free(tab), NULL);
+		return (0);
+	tab[0] = ft_atoi(color[0]);
+	tab[1] = ft_atoi(color[1]);
+	tab[2] = ft_atoi(color[2]);
 	return (tab);
 }

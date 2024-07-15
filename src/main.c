@@ -6,15 +6,25 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/07/15 19:23:41 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/15 19:29:52 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube.h"
 
+void	set_fov(t_game *game, double fov_degrees)
+{
+	double	fov_radians;
+	double	half_fov_tan;
+
+	fov_radians = (fov_degrees) * M_PI / 180.0;
+	half_fov_tan = tan(fov_radians / 2.0);
+	game->pos.planex = game->pos.diry * half_fov_tan;
+	game->pos.planey = -game->pos.dirx * half_fov_tan;
+}
+
 int	start_parse(t_game *game, char **argv)
 {
-	initall(game);
 	if (checkextension(argv[1], ".cub"))
 		return (1);
 	if (calculatemapsize(argv[1], game))
