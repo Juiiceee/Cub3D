@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/07/04 13:58:30 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/15 15:11:34 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,16 +179,13 @@ void render_wall(t_game *game, t_game_ray *rc, int x)
 {
 	int y = rc->drawStart;
 	
-	while (y < rc->drawEnd)
+	while (y <= rc->drawEnd)
     {
         int d = y * 256 - WIN_HEIGHT * 128 + rc->lineHeight * 128;
         int texY = ((d * rc->sprite.height) / rc->lineHeight) / 256;
         char *pixel = rc->sprite.data + (texY *rc->sprite.size_line 
                       + rc->texX * (rc->sprite.bpp / 8));
-        int color = *(int *)pixel;
-        if (rc->side == 1)
-            color = (color >> 1) & 8355711;
-        img_pix_put(&game->img, x, y, color);
+        img_pix_put(&game->img, x, y, *(int *)pixel);
 		y++;
     }
 }
@@ -208,18 +205,12 @@ void raycast(t_game *game)
 		calculate_perp_wall_dist(game, &raycast);
 		calculate_line_height(&raycast);
 		hit_point_texture(game, &raycast);
-		draw_line(game, x, 0, raycast.drawStart, game->map_info.color_ceiling);
-		draw_line(game, x, raycast.drawEnd, WIN_HEIGHT, game->map_info.color_floor);
 		render_wall(game, &raycast, x);
+		draw_line(game, x, 0, raycast.drawStart, game->map_info.color_ceiling);
+		if (raycast.drawEnd != WIN_HEIGHT - 1)
+			draw_line(game, x, raycast.drawEnd, WIN_HEIGHT, game->map_info.color_floor);
 		x++;
 	}
-}
-
-int main_loop(t_game *game)
-{
-	raycast(game);
-	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.img, 0, 0);
-	return 0;
 }
 
 int on_destroy(t_game *game)
@@ -243,69 +234,132 @@ void head_turn(t_game *game, float angle)
 	game->pos.planey = oldPlaneX * sin(angle) + game->pos.planey * cos(angle);
 }
 
-int	ft_iswall(t_game *game, double x, double y)
+double	update_pos_x(double pos_x, double move_x, double pos_y, char **map)
 {
-	if (game->area[(int) y][(int) x] == '0')
-		return (0);
-	return (1);
+	int		y_out;
+	int		y_in;
+	int		future_x;
+
+	y_in = (int)(pos_y + 0.1);
+	y_out = (int)(pos_y - 0.1);
+	if (move_x < 0)
+		future_x = (int)(pos_x + move_x - 0.1);
+	else
+		future_x = (int)(pos_x + move_x + 0.1);
+	if (map[y_in][future_x] != '1'
+		&& map[y_out][future_x] != '1')
+		pos_x += move_x;
+	return (pos_x);
+}
+
+double	update_pos_y(double pos_y, double move_y, double pos_x,	char **map)
+{
+	int		x_out;
+	int		x_in;
+	int		future_y;
+
+	x_in = (int)(pos_x + 0.1);
+	x_out = (int)(pos_x - 0.1);
+	if (move_y < 0)
+		future_y = (int)(pos_y + move_y - 0.1);
+	else
+		future_y = (int)(pos_y + move_y + 0.1);
+	if (map[future_y][x_in] != '1'
+		&& map[future_y][x_out] != '1')
+		pos_y += move_y;
+	return (pos_y);
 }
 
 void move_left(t_game *game)
 {
-	if (!ft_iswall(game, game->pos.posx - game->pos.planex * 0.20, 
-				game->pos.posy - game->pos.planey * 0.20))
-	{
-		game->pos.posx -= game->pos.planex * 0.10;
-		game->pos.posy -= game->pos.planey * 0.10;
-	}
+    double move_x = -game->pos.planex * 0.10;
+    double move_y = -game->pos.planey * 0.10;
+
+    game->pos.posx = update_pos_x(game->pos.posx, move_x, game->pos.posy, game->area);
+    game->pos.posy = update_pos_y(game->pos.posy, move_y, game->pos.posx, game->area);
 }
 
 void move_right(t_game *game)
 {
-	if (!ft_iswall(game, game->pos.posx + game->pos.planex * 0.20, 
-			game->pos.posy + game->pos.planey * 0.20))
-	{
-		game->pos.posx += game->pos.planex * 0.10;
-		game->pos.posy += game->pos.planey * 0.10;
-	}
+    double move_x = game->pos.planex * 0.10;
+    double move_y = game->pos.planey * 0.10;
+
+    game->pos.posx = update_pos_x(game->pos.posx, move_x, game->pos.posy, game->area);
+    game->pos.posy = update_pos_y(game->pos.posy, move_y, game->pos.posx, game->area);
 }
 
 void move_forward(t_game *game)
 {
-	if (!ft_iswall(game, game->pos.posx + game->pos.dirx * 0.20,
-		game->pos.posy + game->pos.diry * 0.20))
-	{
-		game->pos.posx += game->pos.dirx * 0.10;
-		game->pos.posy += game->pos.diry * 0.10;
-	}
+    double move_x = game->pos.dirx * 0.10;
+    double move_y = game->pos.diry * 0.10;
+
+    game->pos.posx = update_pos_x(game->pos.posx, move_x, game->pos.posy, game->area);
+    game->pos.posy = update_pos_y(game->pos.posy, move_y, game->pos.posx, game->area);
 }
 
 void move_back(t_game *game)
 {
-	if (!ft_iswall(game, game->pos.posx - game->pos.dirx * 0.20,
-		game->pos.posy - game->pos.diry * 0.20))
-	{
-	game->pos.posx -= game->pos.dirx * 0.10;
-	game->pos.posy -= game->pos.diry * 0.10;
-	}
+    double move_x = -game->pos.dirx * 0.10;
+    double move_y = -game->pos.diry * 0.10;
+
+    game->pos.posx = update_pos_x(game->pos.posx, move_x, game->pos.posy, game->area);
+    game->pos.posy = update_pos_y(game->pos.posy, move_y, game->pos.posx, game->area);
+}
+
+int key_action(t_game *game)
+{
+	if (game->key[ESCAPE])
+		on_destroy(game);
+	if (game->key[A_KEY])
+		move_left(game);
+	if (game->key[D_KEY])
+		move_right(game);
+	if (game->key[S_KEY])
+		move_back(game);
+	if (game->key[W_KEY])
+		move_forward(game);
+	if (game->key[Larrow_KEY])
+		head_turn(game, 0.10);
+	if (game->key[Rarrow_KEY])
+		head_turn(game, -0.10);
+	return (0);
 }
 
 int on_keypress(int keycode, t_game *game)
 {
 	if (keycode == XK_Escape)
-		on_destroy(game);
+		game->key[ESCAPE] = 1;
 	else if (keycode == XK_a)
-		move_left(game);
+		game->key[A_KEY] = 1;
 	else if (keycode == XK_d)
-		move_right(game);
+		game->key[D_KEY] = 1;
 	else if (keycode == XK_s || keycode == XK_Down)
-		move_back(game);
+		game->key[S_KEY] = 1;
 	else if (keycode == XK_w || keycode == XK_Up)
-		move_forward(game);
+		game->key[W_KEY] = 1;
 	else if (keycode == XK_Left)
-		head_turn(game, 0.10);
+		game->key[Larrow_KEY] = 1;
 	else if (keycode == XK_Right)
-		head_turn(game, -0.10);
+		game->key[Rarrow_KEY] = 1;
+	return (0);
+}
+
+int on_keyrelease(int keycode, t_game *game)
+{
+	if (keycode == XK_Escape)
+		game->key[ESCAPE] = 0;
+	else if (keycode == XK_a)
+		game->key[A_KEY] = 0;
+	else if (keycode == XK_d)
+		game->key[D_KEY] = 0;
+	else if (keycode == XK_s || keycode == XK_Down)
+		game->key[S_KEY] = 0;
+	else if (keycode == XK_w || keycode == XK_Up)
+		game->key[W_KEY] = 0;
+	else if (keycode == XK_Left)
+		game->key[Larrow_KEY] = 0;
+	else if (keycode == XK_Right)
+		game->key[Rarrow_KEY] = 0;
 	return (0);
 }
 
@@ -316,6 +370,14 @@ void set_fov(t_game *game, double fov_degrees)
 
 	game->pos.planex = game->pos.diry * half_fov_tan;
 	game->pos.planey = -game->pos.dirx * half_fov_tan;
+}
+
+int main_loop(t_game *game)
+{
+	raycast(game);
+	key_action(game);
+	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.img, 0, 0);
+	return 0;
 }
 
 int main(int argc, char **argv)
@@ -340,7 +402,7 @@ int main(int argc, char **argv)
 	game.win_ptr = mlx_new_window(game.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Je t'aime wikow <3");
 	game.pos.dirx = 0;
 	game.pos.diry = 1;
-	set_fov(&game, 70);
+	set_fov(&game, 90);
 
 	load_wall(&game);
 	game.img.img = mlx_new_image(game.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
@@ -350,6 +412,7 @@ int main(int argc, char **argv)
 
 	mlx_loop_hook(game.mlx_ptr, main_loop, &game);
 	mlx_hook(game.win_ptr, 02, (1L << 0), &on_keypress, &game);
+	mlx_hook(game.win_ptr, 03, (1L << 1), &on_keyrelease, &game);
 	mlx_hook(game.win_ptr, 17, (1L << 17), &on_destroy, &game);
 	mlx_loop(game.mlx_ptr);
 	freeend(&game);

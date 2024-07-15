@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initTexture.c                                      :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 12:09:54 by lbehr             #+#    #+#             */
-/*   Updated: 2024/06/30 15:48:57 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/15 13:15:51 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,16 @@
 
 void	initall(t_game *game)
 {
+	int i;
+
+	i = 0;
 	inittexture(game);
 	initvalue(game);
+	while (i < 9)
+	{
+		game->key[i] = 0;
+		i++;	
+	}
 }
 
 void	inittexture(t_game *game)

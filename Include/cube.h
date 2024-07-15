@@ -6,7 +6,7 @@
 /*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/03 13:10:38 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/15 13:11:53 by mda-cunh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,19 @@ typedef enum e_bool
 	False,
 	True
 }	t_bool;
+
+typedef enum e_keys
+{
+	W_KEY,
+	A_KEY,
+	S_KEY,
+	D_KEY,
+	Larrow_KEY,
+	Rarrow_KEY,
+	Uarrow_KEY,
+	Darrow_KEY,
+	ESCAPE
+}	t_key;
 
 typedef struct s_coord
 {
@@ -145,6 +158,7 @@ typedef struct s_game
 	void			*win_ptr;
 	char			**map;
 	char			**area;
+	int				key[9];
 	t_game_mesure	mesure;
 	t_game_pos		pos;
 	t_game_texture	textures;
