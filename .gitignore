@@ -3,7 +3,6 @@ minilibx-linux
 cub3D
 obj
 libft.a
-oui.cub
 test.c
 a.out
 salut.xpm
