@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 11:15:53 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/15 20:43:26 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/16 12:29:50 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,14 +201,7 @@ int		gettextures(t_game *game);
 int		gettexturew(t_game *game);
 
 // mapUtils.c
-int		addvaluetexture(char *line, char **map_texture);
-
-// init.c
-void	initall(t_game *game);
-void	inittexture(t_game *game);
-void	initvalue(t_game *game);
-void	set_fov(t_game *game, double fov_degrees);
-int		addvaluetexture(char *line, char **map_texture);
+int		addvaluetexture(char *line, int i, char **map_texture);
 
 // get_next_line.c
 

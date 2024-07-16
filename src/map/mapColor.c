@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapColor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:10:56 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/15 19:27:06 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/16 12:52:40 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	addvaluecolor(char *line, int *color)
 	{
 		if (!(tab[j] >= 0 && tab[j++] <= 255))
 			return (freetab(colorsplit), free(tab),
-				error("Intervalle couleur invalide"));
+				error("Interval couleur invalide"));
 	}
 	*color = create_rgb(tab);
 	return (freetab(colorsplit), free(tab), 0);
@@ -81,10 +81,10 @@ int	*setcolortab(char **color)
 	while (color[i])
 		i++;
 	if (i != 3)
-		return (0);
+		return ((void)error("Nombre de champs couleurs trop nombreux"), NULL);
 	tab = ft_calloc(3, sizeof(int));
 	if (!tab)
-		return (0);
+		return ((void)error("Probleme calloc"), NULL);
 	tab[0] = ft_atoi(color[0]);
 	tab[1] = ft_atoi(color[1]);
 	tab[2] = ft_atoi(color[2]);

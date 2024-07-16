@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/07/15 20:36:58 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/16 13:10:13 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ int	start_parse(t_game *game, char **argv)
 	int	i;
 
 	i = 0;
+	ft_bzero(game, sizeof(t_game));
 	if (checkextension(argv[1], ".cub"))
 		return (1);
 	if (calculatemapsize(argv[1], game))
 		return (1);
 	if (getmapinfo(game))
-		return (freetab(game->map), freeifnotnull(&game->map_info.map_texture)
-			, free(game->map_info.pathmap), 1);
+		return (freetab(game->map), freeifnotnull(&game->map_info.map_texture),
+			free(game->map_info.pathmap), 1);
 	if (checkall(game))
 		return (freeend(game), 1);
 	while (i < 9)
@@ -50,14 +51,14 @@ int	main_loop(t_game *game)
 	return (0);
 }
 
-int	main(int argc, char **argv)
+int main(/*int argc, char **argv*/)
 {
 	t_game	game;
+	char *argv[] = {"caca", "oui.cub", 0};
 
-	if (argc != 2)
-		return (1);
+	if (/*argc == 2*/1)
 	if (start_parse(&game, argv) == 1)
-		return (freeend(&game), 1);
+		return (1);
 	game.mlx_ptr = mlx_init();
 	game.win_ptr = mlx_new_window(game.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
 	load_wall(&game);

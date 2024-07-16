@@ -1,0 +1,6 @@
+/* XPM */
+static char *test[] = {
+/* columns rows colors chars-per-pixel */
+"1 1 1 1",
+".  c #562917",
+"."};

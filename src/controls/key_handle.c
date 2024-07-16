@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_handle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 17:33:34 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/07/15 20:38:42 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/16 13:12:27 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int	key_action(t_game *game)
 	if (game->key[W_KEY])
 		move_forward(game);
 	if (game->key[Larrow_KEY])
-		head_turn(game, 0.10);
+		head_turn(game, 0.005);
 	if (game->key[Rarrow_KEY])
-		head_turn(game, -0.10);
+		head_turn(game, -0.005);
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_exec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 17:33:44 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/07/15 18:15:26 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/16 12:04:46 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	move_left(t_game *game)
 	double	m_x;
 	double	m_y;
 
-	m_x = -game->pos.planex * 0.10;
-	m_y = -game->pos.planey * 0.10;
+	m_x = -game->pos.planex * 0.005;
+	m_y = -game->pos.planey * 0.005;
 	game->pos.posx = hitbox_x(game->pos.posx, m_x, game->pos.posy, game->area);
 	game->pos.posy = hitbox_y(game->pos.posy, m_y, game->pos.posx, game->area);
 }
@@ -42,8 +42,8 @@ void	move_right(t_game *game)
 	double	m_x;
 	double	m_y;
 
-	m_x = game->pos.planex * 0.10;
-	m_y = game->pos.planey * 0.10;
+	m_x = game->pos.planex * 0.005;
+	m_y = game->pos.planey * 0.005;
 	game->pos.posx = hitbox_x(game->pos.posx, m_x, game->pos.posy, game->area);
 	game->pos.posy = hitbox_y(game->pos.posy, m_y, game->pos.posx, game->area);
 }
@@ -53,8 +53,8 @@ void	move_forward(t_game *game)
 	double	m_x;
 	double	m_y;
 
-	m_x = game->pos.dirx * 0.10;
-	m_y = game->pos.diry * 0.10;
+	m_x = game->pos.dirx * 0.005;
+	m_y = game->pos.diry * 0.005;
 	game->pos.posx = hitbox_x(game->pos.posx, m_x, game->pos.posy, game->area);
 	game->pos.posy = hitbox_y(game->pos.posy, m_y, game->pos.posx, game->area);
 }
@@ -64,8 +64,8 @@ void	move_back(t_game *game)
 	double	m_x;
 	double	m_y;
 
-	m_x = -game->pos.dirx * 0.10;
-	m_y = -game->pos.diry * 0.10;
+	m_x = -game->pos.dirx * 0.005;
+	m_y = -game->pos.diry * 0.005;
 	game->pos.posx = hitbox_x(game->pos.posx, m_x, game->pos.posy, game->area);
 	game->pos.posy = hitbox_y(game->pos.posy, m_y, game->pos.posx, game->area);
 }
