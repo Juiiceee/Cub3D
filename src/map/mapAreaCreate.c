@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapAreaCreate.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 15:55:59 by lbehr             #+#    #+#             */
-/*   Updated: 2024/07/15 20:41:05 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/16 14:23:27 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	checkifarea(t_game *game, int *start, int *end)
 		{
 			j = 0;
 			while (game->map[*start] && ft_strlen(game->map[*start
-						+ *end]) != 0)
+					+ *end]) != 0)
 				(*end)++;
 			return (0);
 		}
@@ -55,12 +55,11 @@ void	getareainfo(t_game *game, int start, int end)
 
 	i = 0;
 	game->map_info.area_dim.height = end;
-	game->map_info.area_dim.width = ft_strlen(game->map[start + i]) - 1;
+	game->map_info.area_dim.width = strlenno(game->map[start + i]);
 	while (i < end)
 	{
-		if ((int)ft_strlen(game->map[start + i])
-			- 1 > game->map_info.area_dim.width)
-			game->map_info.area_dim.width = ft_strlen(game->map[start + i]) - 1;
+		if ((int)strlenno(game->map[start + i]) > game->map_info.area_dim.width)
+			game->map_info.area_dim.width = strlenno(game->map[start + i]);
 		i++;
 	}
 }

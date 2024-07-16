@@ -1,15 +1,15 @@
-NO texture/pipi.xpm feurnn
+NO texture/test.xpm feurnn
 
 
-WE texture/caca.xpm
+WE texture/test.xpm
 
-EA texture/caca.xpm kikiki
+EA texture/test.xpm kikiki
 
 pipi
 
-C            255,             84,         0
+C            255,             84,         255
 
-SO texture/pipi.xpm
+SO texture/test.xpm
 
 F            154,             200,         74
 

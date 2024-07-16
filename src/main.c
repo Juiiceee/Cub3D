@@ -6,7 +6,7 @@
 /*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:14:25 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/07/16 13:10:13 by lbehr            ###   ########.fr       */
+/*   Updated: 2024/07/16 13:47:13 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ int	main_loop(t_game *game)
 	return (0);
 }
 
-int main(/*int argc, char **argv*/)
+int main(int argc, char **argv)
 {
 	t_game	game;
-	char *argv[] = {"caca", "oui.cub", 0};
 
-	if (/*argc == 2*/1)
+	if (argc != 2)
+		return (error("Bad nombre parametre"));
 	if (start_parse(&game, argv) == 1)
 		return (1);
 	game.mlx_ptr = mlx_init();

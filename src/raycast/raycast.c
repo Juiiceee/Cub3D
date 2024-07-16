@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mda-cunh <mda-cunh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbehr <lbehr@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 17:24:08 by mda-cunh          #+#    #+#             */
-/*   Updated: 2024/07/15 18:49:55 by mda-cunh         ###   ########.fr       */
+/*   Updated: 2024/07/16 14:09:38 by lbehr            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	render_wall(t_game *game, t_game_ray *rc, int x)
 	{
 		d = y * 256 - WIN_HEIGHT * 128 + rc->line_height * 128;
 		tex_y = ((d * rc->sprite.height) / rc->line_height) / 256;
+		if (tex_y < 0)
+			tex_y = 0;
 		pixel = rc->sprite.data + (tex_y * rc->sprite.size_line
 				+ rc->tex_x * (rc->sprite.bpp / 8));
 		img_pix_put(&game->img, x, y, *(int *)pixel);
